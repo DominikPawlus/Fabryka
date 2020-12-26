@@ -10,7 +10,23 @@ std::ostream& operator<<(std::ostream& out, const Car& car) {
     return out;
 }
 
+bool operator==(const Car& car1, const Car& car2) {
+    if(car1.owner == car2.owner && car1.color == car2.color && car1.brand == car2.brand && car1.door_count == car2.door_count) {
+        return true; 
+    } else {
+        return false;
+    }
+}
+
 int Car::go(int km) {
-    this -> mileage = mileage + km;
+    mileage = this -> mileage + km;
     return mileage;
+};
+
+std::string Car::getColor(){
+    return this->color;
+};
+
+int Car::getDoorCount(){
+    return this->door_count;
 };

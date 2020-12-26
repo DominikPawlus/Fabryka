@@ -17,9 +17,11 @@ class Factory{
     
         void addNewCar(std::string color, int door_count);
 
-        void sell(Car car);
+        Car * sell(Car car, std::string name);
 
         void print();
+
+        void printNew();
 };
 
 #endif //FACTORY_H
