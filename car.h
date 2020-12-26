@@ -9,8 +9,8 @@ class Car {
     private:
     std::string owner;
     std::string color;
-    const std::string brand;
-    const int door_count;
+    std::string brand;
+    int door_count;
     int mileage;
 
     public:
