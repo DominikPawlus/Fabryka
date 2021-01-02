@@ -4,26 +4,24 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "engine_vehicle.h"
 
-class Car {
+class Car : public Engine_Vehicle {
 
     private:
-    std::string owner;
-    std::string color;
-    std::string brand;
     int door_count;
     int mileage;
 
     public:
-    Car(std::string owner, std::string color, std::string brand, int door_count, int mileage = 0);
+    Car(std::string owner, std::string color, std::string brand, int door_count, int capacity, float fuel_amount, float efficiency);
 
     friend std::ostream& operator<<(std::ostream& out, const Car& car);
 
     friend bool operator==(const Car& car1, const Car& car2);
 
-    int go(int km, std::vector<Car> &garage);
+    int go(float km, std::vector<Car> &garage);
 
-    std::string getColor();
+
 
     int getDoorCount();
 };

@@ -3,13 +3,13 @@
 #include <vector>
 
 #include "factory.h"
-#include "car.h"
+#include "Vehicles/car.h"
 
 using namespace std;
 
 int main() {
 
-    Factory BMW = Factory("BMW");
+    Factory Fabryka = Factory("Gigafactory");
     vector<Car> sold_cars;
     int W;
     do {
@@ -19,7 +19,11 @@ int main() {
         cin >> W;
         switch(W) {
             case 1: {
-            
+
+                int brand;
+                std::cout << "Wybierz markę samochodu: " << std::endl << "(1) - Audi" << std::endl << "(2) - Mercedes" << std::endl << "(3) - BMW" << std::endl;
+                cin >> brand;
+
                 string color;
                 cout << "Podaj kolor: " << endl;
                 cin >> color;
@@ -28,10 +32,10 @@ int main() {
                 cout << "Podaj liczbę drzwi: " << endl;
                 cin >> door_count;
 
-                BMW.addNewCar(color, door_count);
+                Fabryka.addNewCar(color, door_count, brand);
 
                 cout << "Wyprodukowany samochód: " << endl;
-                BMW.printNew();
+                Fabryka.printNew();
                 break;
             }
 
@@ -39,26 +43,27 @@ int main() {
                 
                 cout << "Wybierz samochód, który chcesz sprzedać." << endl;
 
-                string owner = "Factory";
-
-                string color;
-                cout << "Podaj kolor: " << endl;
-                cin >> color;
+                string owner = "Gigafactory";
 
                 string brand;
                 cout << "Podaj markę: " << endl;
                 cin >> brand;
 
+                string color;
+                cout << "Podaj kolor: " << endl;
+                cin >> color;
+
+
                 int door_count;
                 cout << "Podaj liczbę drzwi: " << endl;
                 cin >> door_count;
 
-                Car tmp = Car(owner, color, brand, door_count, 0);
+                Car tmp = Car(owner, color, brand, door_count, 0, 0); //capacity = 0, fuel_amount = 0 nie ma znaczenia dla tmp
 
                 cout << "Podaj nazwisko nowego właściciela: " << endl;
                 cin >> owner;
 
-                Car* sold_car = BMW.sell(tmp, owner);
+                Car* sold_car = Fabryka.sell(tmp, owner);
                 if(sold_car == nullptr) {
                     cout << "Podany samochód nie istnieje." << endl;
                     break;
@@ -78,19 +83,27 @@ int main() {
                 cout << "Podaj właściciela: " << endl; 
                 cin >> owner;
 
-                string color;
-                cout << "Podaj kolor: " << endl;
-                cin >> color;
-
                 string brand;
                 cout << "Podaj markę: " << endl;
                 cin >> brand;
+
+                string color;
+                cout << "Podaj kolor: " << endl;
+                cin >> color;
 
                 int door_count;
                 cout << "Podaj liczbę drzwi: " << endl;
                 cin >> door_count;
 
-                Car tmp = Car(owner, color, brand, door_count, 0);
+                Car tmp = Car(owner, color, brand, door_count, 0, 0); //capacity = 0, fuel_amount = 0 nie ma znaczenia dla tmp
+
+                for(int i = 0; i < sold_cars.size(); i++) {
+                    if(sold_cars.at(i) == tmp) {
+                        break;
+                        } else {
+                        cout << "Podany samochód nie istnieje." << endl;
+                    }
+                }
 
                 int dist;
                 cout << "Podaj przejechany dystans: " << endl;
@@ -104,32 +117,39 @@ int main() {
                 cout << "Podaj właściciela: " << endl;
                 cin >> owner;
 
-                string color;
-                cout << "Podaj kolor: " << endl;
-                cin >> color;
-
                 string brand;
                 cout << "Podaj markę: " << endl;
                 cin >> brand;
+
+                string color;
+                cout << "Podaj kolor: " << endl;
+                cin >> color;
 
                 int door_count;
                 cout << "Podaj liczbę drzwi: " << endl;
                 cin >> door_count;
 
-                Car tmp = Car(owner, color, brand, door_count, 0);
+                Car tmp = Car(owner, color, brand, door_count, 0, 0); //capacity = 0, fuel_amount = 0 nie ma znaczenia dla tmp
 
                 for(int i = 0; i < sold_cars.size(); i++) {
                     if(sold_cars.at(i) == tmp) {
-                        cout << tmp << endl;
+                        cout << sold_cars.at(i) << endl;
                     } else {
                         cout << "Podany samochód nie istnieje." << endl;
                     }
                 }
+                break;
             }
+
             case 5: {
                 for(int i = 0; i < sold_cars.size(); i++) {
-                    cout << i << ". " << endl << sold_cars.at(i) << endl;
+                    cout << i + 1 << ". " << endl << sold_cars.at(i) << endl;
                 }
+                break;
+            }
+
+            default: {
+                break;
             }
         }
     } while(W != 0);
