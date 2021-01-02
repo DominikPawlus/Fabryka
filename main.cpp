@@ -14,7 +14,8 @@ int main() {
     int W;
     do {
         cout << "Wybierz opcję: " << endl; 
-        cout << "(1) - Wyprodukuj samochód" << endl << "(2) - Sprzedaj samochód z fabryki" << endl << "(3) - Jedź wybranym samochodem" << endl << "(0) - Zamknij program" << endl;
+        cout << "(1) - Wyprodukuj samochód" << endl << "(2) - Sprzedaj samochód z fabryki" << endl << "(3) - Jedź wybranym samochodem" << endl
+        << "(4) - Wyświetl dane wybranego sprzedanego samochodu" << endl << "(5) - Pokaż wzystkie sprzedane samochody" << endl << "(0) - Zamknij program" << endl;
         cin >> W;
         switch(W) {
             case 1: {
@@ -38,7 +39,7 @@ int main() {
                 
                 cout << "Wybierz samochód, który chcesz sprzedać." << endl;
 
-                string owner = "BMW";
+                string owner = "Factory";
 
                 string color;
                 cout << "Podaj kolor: " << endl;
@@ -62,12 +63,10 @@ int main() {
                     cout << "Podany samochód nie istnieje." << endl;
                     break;
                 } else {
-                    cout << "Wybrano samochód." << endl;
+                    cout << "Sprzedano samochód." << endl;
                 }
                 cout << *sold_car << endl;
-
                 sold_cars.push_back(*sold_car);
-                cout << "Sprzedany samochód: " << sold_car << endl;
                 break;
             }
 
@@ -97,8 +96,40 @@ int main() {
                 cout << "Podaj przejechany dystans: " << endl;
                 cin >> dist;
 
-                //Car::go(dist);
+                tmp.go(dist, sold_cars);
                 break;
+            }
+            case 4: {
+                string owner;
+                cout << "Podaj właściciela: " << endl;
+                cin >> owner;
+
+                string color;
+                cout << "Podaj kolor: " << endl;
+                cin >> color;
+
+                string brand;
+                cout << "Podaj markę: " << endl;
+                cin >> brand;
+
+                int door_count;
+                cout << "Podaj liczbę drzwi: " << endl;
+                cin >> door_count;
+
+                Car tmp = Car(owner, color, brand, door_count, 0);
+
+                for(int i = 0; i < sold_cars.size(); i++) {
+                    if(sold_cars.at(i) == tmp) {
+                        cout << tmp << endl;
+                    } else {
+                        cout << "Podany samochód nie istnieje." << endl;
+                    }
+                }
+            }
+            case 5: {
+                for(int i = 0; i < sold_cars.size(); i++) {
+                    cout << i << ". " << endl << sold_cars.at(i) << endl;
+                }
             }
         }
     } while(W != 0);

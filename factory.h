@@ -22,6 +22,8 @@ class Factory{
         void print();
 
         void printNew();
+
+        std::vector<Car> openGarage();
 };
 
 #endif //FACTORY_H

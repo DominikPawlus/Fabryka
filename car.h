@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Car {
 
@@ -20,7 +21,7 @@ class Car {
 
     friend bool operator==(const Car& car1, const Car& car2);
 
-    int go(int km);
+    int go(int km, std::vector<Car> &garage);
 
     std::string getColor();
 

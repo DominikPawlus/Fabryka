@@ -18,9 +18,17 @@ bool operator==(const Car& car1, const Car& car2) {
     }
 }
 
-int Car::go(int km) {
-    mileage = this -> mileage + km;
-    return mileage;
+int Car::go(int km, std::vector<Car> &garage) {
+    for(int i = 0; i < garage.size(); i++) {
+        if(garage.at(i) == *this) {
+            std::cout << "Jest" << std::endl;
+            garage.at(i).mileage += km;
+            std::cout << garage.at(i) << std::endl;
+            return garage.at(i).mileage;
+        }
+        std::cout << "Nie ma" << std::endl;
+    }
+    return 0;
 };
 
 std::string Car::getColor(){
