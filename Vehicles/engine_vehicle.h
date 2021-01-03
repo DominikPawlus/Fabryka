@@ -14,7 +14,11 @@ protected:
 public:
     Engine_Vehicle(std::string owner, std::string color, std::string brand, int capacity, float fuel_amount, float efficiency);
 
-    float getFuelAmount();
+    friend bool operator==(const Engine_Vehicle& car1, const Engine_Vehicle& car2);
+
+    float getFuelAmount() const;
+
+    float getEfficiency() const;
 };
 
 #endif //ENGINE_VEHICLE_H
