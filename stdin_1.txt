@@ -1,8 +1,0 @@
-1   1   Biały   5
-2   Audi    Biały   5   Nowak
-3   Nowak   Audi    Biały   5   400
-4   Nowak   Audi    Biały   5
-5
-6   1   Nowak   Audi    Biały   5
-6   2   Kowalski    Audi    Biały   5
-7   Kowalski    Audi    Biały   5   Czarny

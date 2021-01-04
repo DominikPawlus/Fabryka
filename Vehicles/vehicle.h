@@ -17,6 +17,7 @@ public:
     std::string color;
     std::string owner;
 
+    Vehicle();
     Vehicle(std::string owner, std::string color, std::string brand, int capacity);
 
     std::string getColor();

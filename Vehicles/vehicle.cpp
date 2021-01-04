@@ -2,6 +2,8 @@
 
 #include <utility>
 
+Vehicle::Vehicle() {}
+
 Vehicle::Vehicle(std::string owner, std::string color, std::string brand, int capacity)
     : owner(std::move(owner)), color(std::move(color)), brand(std::move(brand)),  capacity(capacity){
 }

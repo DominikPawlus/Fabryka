@@ -2,6 +2,8 @@
 
 #include <utility>
 
+Car::Car() {}
+
 Car::Car(std::string owner, std::string color, std::string brand, int door_count, int capacity, float fuel_amount, float efficiency)
     : Engine_Vehicle(std::move(owner), std::move(color), std::move(brand), capacity, fuel_amount, efficiency), door_count(door_count) {
 }
@@ -27,7 +29,7 @@ int Car::go(float km, std::vector<Car> &garage) {
         if(garage.at(i) == *this) {
             garage.at(i).mileage += km;
             garage.at(i).fuel_amount -= km / 100 * garage.at(i).getEfficiency();
-            std::cout << garage.at(i) << std::endl;
+            std::cout << "Przejechałeś " << km << " kilometrów samochodem: " << std::endl << garage.at(i) << std::endl;
             return garage.at(i).mileage;
         }
     }

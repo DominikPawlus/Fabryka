@@ -25,3 +25,25 @@ Car loadCarData(int W, int K) {
 
     return tmp;
 }
+
+Car loadCarDataFile(int W, int K, std::ifstream &plik) {
+
+    std::string owner = "Gigafactory";
+    std::string brand;
+    std::string color;
+    int door_count;
+
+    if(W == 3 || W == 4 || W == 6 || W == 7) {
+        plik >> owner;
+    }
+    if(W != 1) {
+        plik >> brand;
+    }
+
+    plik >> color;
+    plik >> door_count;
+
+    Car tmp = Car(owner, color, brand, door_count, 0, 0, 0); //capacity = 0, fuel_amount = 0 nie ma znaczenia dla tmp
+
+    return tmp;
+}

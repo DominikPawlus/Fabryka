@@ -32,7 +32,7 @@ void Dealer::buy(const Car& car, std::vector<Car> &garage) {
 
     for(int i = 0; i < garage.size(); i++) {
         if(car == garage.at(i)) {
-            std::cout << "Cena zakupu: " << buyPrice(garage.at(i)) << " zł" << std::endl;
+            std::cout << "Sprzedałeś samochód: " << std::endl << garage.at(i) << std::endl << "za " << buyPrice(garage.at(i)) << " zł" << std::endl;
             garage.at(i).owner = "Komis";
             if(garage.at(i).getBrand() == "BMW") {
                 garage.at(i).splitMileage();
@@ -43,12 +43,12 @@ void Dealer::buy(const Car& car, std::vector<Car> &garage) {
     }
 }
 
-void Dealer::sell(const Car& car, const std::string& owner, std::vector<Car> &garage) {
+void Dealer::sell(const Car& car, const std::string& new_owner, std::vector<Car> &garage) {
 
     for(int i = 0; i < this -> parking.size(); i++) {
         if(car == parking.at(i)) {
-            std::cout << "Cena sprzedaży: " << sellPrice(parking.at(i)) << " zł" << std::endl;
-            parking.at(i).owner = owner;
+            parking.at(i).owner = new_owner;
+            std::cout << "Kupiłeś samochód: " << std::endl << parking.at(i) << std::endl << "za " << sellPrice(parking.at(i)) << " zł" << std::endl;
             garage.push_back(parking.at(i));
             parking.erase(parking.begin() + i);
         }

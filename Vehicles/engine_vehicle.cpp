@@ -2,6 +2,8 @@
 
 #include <utility>
 
+Engine_Vehicle::Engine_Vehicle() {}
+
 Engine_Vehicle::Engine_Vehicle(std::string owner, std::string color, std::string brand, int capacity, float fuel_amount, float efficiency)
     : Vehicle(std::move(owner), std::move(color), std::move(brand), capacity), fuel_amount(fuel_amount), efficiency(efficiency) {
 }
