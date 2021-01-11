@@ -43,14 +43,14 @@ void Factory::addNewCar(std::string color, int door_count, int brand) {
         }
     }
 
-    Car car = Car(this -> name, color, brand_name, door_count, capacity, fuel_amount, efficiency);
+    Car car = Car(this -> name, std::move(color), brand_name, door_count, capacity, fuel_amount, efficiency);
     this -> garage.push_back(car);
 }
 
-Car * Factory::sell(Car car, std::string name) {
+Car * Factory::sell(const Car& car, const std::string& car_name) {
     for(int i = 0; i < this -> garage.size(); i++) {
         if(this -> garage.at(i) == car) {
-            Car * tmp = new Car(name, this -> garage.at(i).getColor(), garage.at(i).getBrand(),this -> garage.at(i).getDoorCount(), this -> garage.at(i).getCapacity(), garage.at(i).getFuelAmount(), garage.at(i).getEfficiency());
+            Car * tmp = new Car(car_name, this -> garage.at(i).getColor(), garage.at(i).getBrand(), this -> garage.at(i).getDoorCount(), this -> garage.at(i).getCapacity(), garage.at(i).getFuelAmount(), garage.at(i).getEfficiency());
             this -> garage.erase(this -> garage.begin() + i);
             return tmp;
         }
@@ -58,16 +58,6 @@ Car * Factory::sell(Car car, std::string name) {
     return nullptr;
 }
 
-void Factory::print() {
-    for(int i = 0; i < this->garage.size(); i++) {
-        std::cout << this -> garage.at(i) << std::endl;
-    }
-}
-
 void Factory::printNew() {
     std::cout << this -> garage.at(this->garage.size()-1) << std::endl;
-}
-
-std::vector<Car> Factory::openGarage() {
-    return this -> garage;
 }

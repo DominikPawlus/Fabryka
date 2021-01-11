@@ -13,17 +13,13 @@ class Factory{
         std::vector<Car> garage;
 
     public:
-        Factory(std::string name = "Gigafactory");
+        explicit Factory(std::string name = "Gigafactory");
     
         void addNewCar(std::string color, int door_count, int brand);
 
-        Car * sell(Car car, std::string name);
-
-        void print();
+        Car * sell(const Car& car, const std::string& car_name);
 
         void printNew();
-
-        std::vector<Car> openGarage();
 };
 
 #endif //FACTORY_H

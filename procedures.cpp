@@ -20,13 +20,19 @@ Car loadCarData(int W, int K) {
     std::cin >> color;
     std::cout << "Podaj liczbę drzwi: " << std::endl;
     std::cin >> door_count;
+    if (std::cin.fail()) {
+        std::cin.clear();
+
+        false_door_count kapsula;
+        throw kapsula;
+    }
 
     Car tmp = Car(owner, color, brand, door_count, 0, 0, 0); //capacity = 0, fuel_amount = 0 nie ma znaczenia dla tmp
 
     return tmp;
 }
 
-Car loadCarDataFile(int W, int K, std::ifstream &plik) {
+Car loadCarDataFile(int W, std::ifstream &plik) {
 
     std::string owner = "Gigafactory";
     std::string brand;
@@ -42,8 +48,25 @@ Car loadCarDataFile(int W, int K, std::ifstream &plik) {
 
     plik >> color;
     plik >> door_count;
+    if (plik.fail()) {
+        false_door_count kapsula;
+        throw kapsula;
+    }
 
     Car tmp = Car(owner, color, brand, door_count, 0, 0, 0); //capacity = 0, fuel_amount = 0 nie ma znaczenia dla tmp
 
     return tmp;
+}
+
+Car findCar(Car car, std::vector<Car> &garage) {
+
+    for(auto & i : garage) {
+        if(i == car) {
+            car = i;
+            return car;
+        }
+    }
+
+    car_no_exist kapsula;
+    throw kapsula;
 }

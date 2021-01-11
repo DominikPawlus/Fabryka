@@ -20,7 +20,7 @@ public:
     Vehicle();
     Vehicle(std::string owner, std::string color, std::string brand, int capacity);
 
-    std::string getColor();
+    std::string getColor() const;
 
     std::string getBrand();
 

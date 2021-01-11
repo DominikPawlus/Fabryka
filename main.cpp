@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream>
 
 #include "factory.h"
 #include "Vehicles/car.h"
@@ -27,6 +26,7 @@ int main(int argc, char* argv[]) {
     vector<Car> sold_cars;
     Dealer Komis = Dealer();
     int W = 0;
+
     do {
         if(plik.is_open()) {
             cout << endl << "============================" << endl;
@@ -38,6 +38,7 @@ int main(int argc, char* argv[]) {
                  << "(5) - Pokaż wzystkie sprzedane samochody" << endl << "(6) - Wizyta w komisie" << endl
                  << "(7) - wizyta u lakiernika" << endl << "(0) - Zamknij program" << endl;
         }
+
         if(plik.is_open()) {
             plik >> W;
         } else {
@@ -82,11 +83,24 @@ int main(int argc, char* argv[]) {
 
                 Car tmp;
                 if(plik.is_open()) {
-                    tmp = loadCarDataFile(W, 0, plik);
+                    try {
+                        tmp = loadCarDataFile(W, plik);
+                    }
+                    catch (false_door_count &kapsula) {
+                        cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                        exit (EXIT_FAILURE);
+                    }
                     plik >> owner;
                 } else {
                     cout << "Wybierz samochód, który chcesz sprzedać." << endl;
-                    tmp = loadCarData(W, 0);
+
+                    try {
+                        tmp = loadCarData(W, 0);
+                    }
+                    catch (false_door_count &kapsula) {
+                        cout << kapsula.msg << endl;
+                    }
+
                     cout << "Podaj nazwisko nowego właściciela: " << endl;
                     cin >> owner;
                 }
@@ -109,23 +123,26 @@ int main(int argc, char* argv[]) {
 
                 Car tmp;
                 if(plik.is_open()) {
-                    tmp = loadCarDataFile(W, 0, plik);
+                    try {
+                        tmp = loadCarDataFile(W, plik);
+                    }
+                    catch(false_door_count &kapsula){
+                        cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                        exit (EXIT_FAILURE);
+                    }
                 } else {
                     cout << "Wybierz samochód, którym chcesz jechać." << endl;
                     tmp = loadCarData(W, 0);
                 }
 
-                for(int i = 0; i < sold_cars.size(); i++) {
-                    if(sold_cars.at(i) == tmp) {
-                        tmp = sold_cars.at(i);
-                        break;
-                        } else {
-                        cout << "Podany samochód nie istnieje." << endl;
-                        break;
-                    }
+                try {
+                    tmp = findCar(tmp, sold_cars);
+                }
+                catch(car_no_exist &kapsula) {
+                    cout << kapsula.msg << endl;
                 }
 
-                int dist;
+                float dist;
 
                 if(plik.is_open()) {
                     plik >> dist;
@@ -143,20 +160,31 @@ int main(int argc, char* argv[]) {
 
                 Car tmp;
                 if(plik.is_open()) {
-                    tmp = loadCarDataFile(W, 0, plik);
+                    try {
+                        tmp = loadCarDataFile(W, plik);
+                    }
+                    catch(false_door_count &kapsula){
+                        cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                        exit (EXIT_FAILURE);
+                    }
                 } else {
-                    tmp = loadCarData(W, 0);
-                }
-
-                for(int i = 0; i < sold_cars.size(); i++) {
-                    if(sold_cars.at(i) == tmp) {
-                        cout << "Dane wybranego samochodu: " << endl;
-                        cout << sold_cars.at(i) << endl;
-                    } else {
-                        cout << "Podany samochód nie istnieje." << endl;
-                        break;
+                    try {
+                        tmp = loadCarData(W, 0);
+                    }
+                    catch(false_door_count &kapsula){
+                        cout << kapsula.msg << endl;
                     }
                 }
+
+                try {
+                    tmp = findCar(tmp, sold_cars);
+                }
+                catch(car_no_exist &kapsula) {
+                    cout << kapsula.msg << endl;
+                }
+
+                cout << "Dane wybranego samochodu: " << endl << tmp << endl;
+
                 break;
             }
 
@@ -189,9 +217,20 @@ int main(int argc, char* argv[]) {
 
                         Car tmp;
                         if(plik.is_open()) {
-                            tmp = loadCarDataFile(W, K, plik);
+                            try {
+                                tmp = loadCarDataFile(W, plik);
+                            }
+                            catch(false_door_count &kapsula){
+                                cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                                exit (EXIT_FAILURE);
+                            }
                         } else {
-                            tmp = loadCarData(W, K);
+                            try {
+                                tmp = loadCarData(W, K);
+                            }
+                            catch(false_door_count &kapsula) {
+                                cout << kapsula.msg << endl;
+                            }
                         }
 
                         for (int i = 0; i < sold_cars.size(); i++) {
@@ -208,11 +247,22 @@ int main(int argc, char* argv[]) {
 
                         if(plik.is_open()) {
                             plik >> new_owner;
-                            tmp = loadCarDataFile(W, K, plik);
+                            try {
+                                tmp = loadCarDataFile(W, plik);
+                            }
+                            catch(false_door_count &kapsula){
+                                cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                                exit (EXIT_FAILURE);
+                            }
                         } else {
                             cout << "Podaj nazwisko nowego właściciela: " << endl;
                             cin >> new_owner;
-                            tmp = loadCarData(W, K);
+                            try {
+                                tmp = loadCarData(W, K);
+                            }
+                            catch(false_door_count &kapsula) {
+                                cout << kapsula.msg << endl;
+                            }
                         }
 
                         Komis.sell(tmp, new_owner, sold_cars);
@@ -231,21 +281,29 @@ int main(int argc, char* argv[]) {
                 cout << "LAKIERNIK" << endl << endl;
                 Car tmp;
                 if(plik.is_open()) {
-                    tmp = loadCarDataFile(W, 0, plik);
+                    try {
+                        tmp = loadCarDataFile(W, plik);
+                    }
+                    catch(false_door_count &kapsula){
+                        cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                        exit (EXIT_FAILURE);
+                    }
                 } else {
-                    tmp = loadCarData(W, 0);
-                }
-
-                for(int i = 0; i < sold_cars.size(); i++) {
-                    if (sold_cars.at(i) == tmp) {
-                        Varnisher::changeColor(sold_cars.at(i), plik);
-                    } else {
-                        if(i == sold_cars.size() - 1) {
-                            cout << "Podany samochód nie istnieje." << endl;
-                        }
+                    try {
+                        tmp = loadCarData(W, 0);
+                    }
+                    catch(false_door_count &kapsula) {
+                        cout << kapsula.msg;
                     }
                 }
-                break;
+                try {
+                    tmp = findCar(tmp, sold_cars);
+                }
+                catch (car_no_exist &kapsula) {
+                    cout << kapsula.msg << endl;
+                }
+
+                Varnisher::changeColor(tmp, plik);
             }
 
             default: {

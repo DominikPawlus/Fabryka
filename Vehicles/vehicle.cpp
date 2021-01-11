@@ -8,7 +8,7 @@ Vehicle::Vehicle(std::string owner, std::string color, std::string brand, int ca
     : owner(std::move(owner)), color(std::move(color)), brand(std::move(brand)),  capacity(capacity){
 }
 
-std::string Vehicle::getColor() {
+std::string Vehicle::getColor() const {
     return this->color;
 };
 
