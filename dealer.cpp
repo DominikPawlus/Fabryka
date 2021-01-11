@@ -28,7 +28,7 @@ int Dealer::sellPrice(Car car) {
     return price;
 }
 
-void Dealer::buy(const Car& car, std::vector<Car> &garage) {
+void Dealer::buyCar(const Car& car, std::vector<Car> &garage) {
 
     for(int i = 0; i < garage.size(); i++) {
         if(car == garage.at(i)) {
@@ -43,7 +43,7 @@ void Dealer::buy(const Car& car, std::vector<Car> &garage) {
     }
 }
 
-void Dealer::sell(const Car& car, const std::string& new_owner, std::vector<Car> &garage) {
+void Dealer::sellCar(const Car& car, const std::string& new_owner, std::vector<Car> &garage) {
 
     for(int i = 0; i < this -> parking.size(); i++) {
         if(car == parking.at(i)) {

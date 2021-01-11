@@ -19,9 +19,9 @@ public:
 
     static int sellPrice(Car car);
 
-    void buy(const Car& car, std::vector<Car> &garage);
+    void buyCar(const Car& car, std::vector<Car> &garage);
 
-    void sell(const Car& car, const std::string& owner, std::vector<Car> &garage);
+    void sellCar(const Car& car, const std::string& owner, std::vector<Car> &garage);
 
 };
 

@@ -20,6 +20,6 @@ Car loadCarData(int W, int K);
 
 Car loadCarDataFile(int W, std::ifstream &plik);
 
-Car findCar(Car car, std::vector<Car> &garage);
+int findCar(Car car, std::vector<Car> &garage);
 
 #endif //PROCEDURES_H

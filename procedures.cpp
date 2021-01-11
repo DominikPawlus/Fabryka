@@ -58,12 +58,11 @@ Car loadCarDataFile(int W, std::ifstream &plik) {
     return tmp;
 }
 
-Car findCar(Car car, std::vector<Car> &garage) {
+int findCar(Car car, std::vector<Car> &garage) {
 
-    for(auto & i : garage) {
-        if(i == car) {
-            car = i;
-            return car;
+    for(int i = 0; i < garage.size(); i++) {
+        if(car == garage.at(i)) {
+            return i;
         }
     }
 

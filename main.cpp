@@ -4,6 +4,7 @@
 
 #include "factory.h"
 #include "Vehicles/car.h"
+#include "Vehicles/motorcycle.h"
 #include "procedures.h"
 #include "dealer.h"
 #include "varnisher.h"
@@ -24,7 +25,9 @@ int main(int argc, char* argv[]) {
 
     Factory Fabryka = Factory("Gigafactory");
     vector<Car> sold_cars;
+    vector<Motorcycle> sold_motorcycles;
     Dealer Komis = Dealer();
+
     int W = 0;
 
     do {
@@ -36,7 +39,7 @@ int main(int argc, char* argv[]) {
                  << "(3) - Jedź wybranym samochodem" << endl
                  << "(4) - Wyświetl dane wybranego sprzedanego samochodu" << endl
                  << "(5) - Pokaż wzystkie sprzedane samochody" << endl << "(6) - Wizyta w komisie" << endl
-                 << "(7) - wizyta u lakiernika" << endl << "(0) - Zamknij program" << endl;
+                 << "(7) - Wizyta u lakiernika" << endl << "(0) - Zamknij program" << endl;
         }
 
         if(plik.is_open()) {
@@ -122,6 +125,7 @@ int main(int argc, char* argv[]) {
                 cout << "DROGA" << endl << endl;
 
                 Car tmp;
+                int tmp_i;
                 if(plik.is_open()) {
                     try {
                         tmp = loadCarDataFile(W, plik);
@@ -136,7 +140,7 @@ int main(int argc, char* argv[]) {
                 }
 
                 try {
-                    tmp = findCar(tmp, sold_cars);
+                    tmp = sold_cars.at(findCar(tmp, sold_cars));
                 }
                 catch(car_no_exist &kapsula) {
                     cout << kapsula.msg << endl;
@@ -177,7 +181,7 @@ int main(int argc, char* argv[]) {
                 }
 
                 try {
-                    tmp = findCar(tmp, sold_cars);
+                    tmp = sold_cars.at(findCar(tmp, sold_cars));
                 }
                 catch(car_no_exist &kapsula) {
                     cout << kapsula.msg << endl;
@@ -235,7 +239,7 @@ int main(int argc, char* argv[]) {
 
                         for (int i = 0; i < sold_cars.size(); i++) {
                             if (tmp == sold_cars.at(i)) {
-                                Komis.buy(sold_cars.at(i), sold_cars);
+                                Komis.buyCar(sold_cars.at(i), sold_cars);
                             }
                         }
                         break;
@@ -265,7 +269,7 @@ int main(int argc, char* argv[]) {
                             }
                         }
 
-                        Komis.sell(tmp, new_owner, sold_cars);
+                        Komis.sellCar(tmp, new_owner, sold_cars);
                         break;
                     }
 
@@ -280,6 +284,7 @@ int main(int argc, char* argv[]) {
 
                 cout << "LAKIERNIK" << endl << endl;
                 Car tmp;
+                int tmp_i;
                 if(plik.is_open()) {
                     try {
                         tmp = loadCarDataFile(W, plik);
@@ -297,13 +302,13 @@ int main(int argc, char* argv[]) {
                     }
                 }
                 try {
-                    tmp = findCar(tmp, sold_cars);
+                    tmp_i = findCar(tmp, sold_cars);
                 }
                 catch (car_no_exist &kapsula) {
                     cout << kapsula.msg << endl;
                 }
 
-                Varnisher::changeColor(tmp, plik);
+                Varnisher::changeColor(sold_cars.at(tmp_i), plik);
             }
 
             default: {
