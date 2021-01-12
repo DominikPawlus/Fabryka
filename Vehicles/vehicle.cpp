@@ -12,12 +12,12 @@ std::string Vehicle::getColor() const {
     return this->color;
 };
 
-int Vehicle::getCapacity() const {
-    return this -> capacity;
-}
-
 std::string Vehicle::getBrand() {
     return this -> brand;
+}
+
+int Vehicle::getCapacity() const {
+    return this -> capacity;
 }
 
 int Vehicle::getMileage() const {

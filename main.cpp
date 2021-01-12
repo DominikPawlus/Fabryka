@@ -3,8 +3,7 @@
 #include <vector>
 
 #include "factory.h"
-#include "Vehicles/car.h"
-#include "Vehicles/motorcycle.h"
+#include "Vehicles/engine_vehicle.h"
 #include "procedures.h"
 #include "dealer.h"
 #include "varnisher.h"
@@ -22,12 +21,10 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    Factory<Car> Fabryka = Factory<Car> ("Gigafactory");
+    Dealer<Engine_Vehicle> Komis = Dealer<Engine_Vehicle>();
 
-    Factory Fabryka = Factory("Gigafactory");
-    Dealer<Car> Komis = Dealer<Car>();
-    Dealer<Motorcycle> Komis_M = Dealer<Motorcycle>();
-
-    vector<Car> sold_cars;
+    vector<Engine_Vehicle> sold_engine_vehicles;
 
     int W = 0;
 
@@ -72,9 +69,9 @@ int main(int argc, char* argv[]) {
                     cin >> door_count;
                 }
 
-                Fabryka.addNewCar(color, door_count, brand);
+                Fabryka.addNewVehicle(color, door_count, brand);
 
-                cout << "Wyprodukowany samochód: " << endl;
+                cout << "Wyprodukowany pojazd: " << endl;
                 Fabryka.printNew();
                 cout << endl;
                 break;
@@ -89,18 +86,19 @@ int main(int argc, char* argv[]) {
 
                 if(plik.is_open()) {
                     try {
-                        tmp = loadCarDataFile(W, plik);
+                        Car tmp = loadEngineVehicleDataFile<Car>(W, plik);
                     }
                     catch (false_door_count &kapsula) {
                         cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
                         exit (EXIT_FAILURE);
                     }
                     plik >> owner;
+
                 } else {
-                    cout << "Wybierz samochód, który chcesz sprzedać." << endl;
+                    cout << "Wybierz pojazd, który chcesz sprzedać." << endl;
 
                     try {
-                        tmp = loadCarData(W, 0);
+                        Car tmp = loadEngineVehicleData<Car>(W, 0);
                     }
                     catch (false_door_count &kapsula) {
                         cout << kapsula.msg << endl;
@@ -110,15 +108,15 @@ int main(int argc, char* argv[]) {
                     cin >> owner;
                 }
 
-                Car* sold_car = Fabryka.sell(tmp, owner);
+                Car *sold_car = Fabryka.sell(tmp, owner);
                 if(sold_car == nullptr) {
-                    cout << "Podany samochód nie istnieje." << endl;
+                    cout << "Podany pojazd nie istnieje." << endl;
                     break;
                 } else {
                     cout << "Sprzedano samochód." << endl;
                 }
                 cout << *sold_car << endl << endl;
-                sold_cars.push_back(*sold_car);
+                sold_engine_vehicles.push_back(*sold_car);
                 break;
             }
 
@@ -126,10 +124,10 @@ int main(int argc, char* argv[]) {
 
                 cout << "DROGA" << endl << endl;
 
-                Car tmp;
+                Engine_Vehicle tmp;
                 if(plik.is_open()) {
                     try {
-                        tmp = loadCarDataFile(W, plik);
+                        Car tmp = loadEngineVehicleDataFile<Car>(W, plik);
                     }
                     catch(false_door_count &kapsula){
                         cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
@@ -137,11 +135,11 @@ int main(int argc, char* argv[]) {
                     }
                 } else {
                     cout << "Wybierz samochód, którym chcesz jechać." << endl;
-                    tmp = loadCarData(W, 0);
+                    Car tmp = loadEngineVehicleData<Car>(W, 0);
                 }
 
                 try {
-                    tmp = sold_cars.at(findCar(tmp, sold_cars));
+                    tmp = sold_engine_vehicles.at(findEngineVehicle(tmp, sold_engine_vehicles));
                 }
                 catch(car_no_exist &kapsula) {
                     cout << kapsula.msg << endl;
@@ -156,17 +154,17 @@ int main(int argc, char* argv[]) {
                     cin >> dist;
                 }
 
-                tmp.go(dist, sold_cars);
+                tmp.go(dist, sold_engine_vehicles);
                 break;
             }
             case 4: {
 
                 cout << "GARAŻ" << endl << endl;
 
-                Car tmp;
+                Engine_Vehicle tmp;
                 if(plik.is_open()) {
                     try {
-                        tmp = loadCarDataFile(W, plik);
+                        Car tmp = loadEngineVehicleDataFile<Car>(W, plik);
                     }
                     catch(false_door_count &kapsula){
                         cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
@@ -174,7 +172,7 @@ int main(int argc, char* argv[]) {
                     }
                 } else {
                     try {
-                        tmp = loadCarData(W, 0);
+                        Car tmp = loadEngineVehicleData<Car>(W, 0);
                     }
                     catch(false_door_count &kapsula){
                         cout << kapsula.msg << endl;
@@ -182,7 +180,7 @@ int main(int argc, char* argv[]) {
                 }
 
                 try {
-                    tmp = sold_cars.at(findCar(tmp, sold_cars));
+                    tmp = sold_engine_vehicles.at(findEngineVehicle(tmp, sold_engine_vehicles));
                 }
                 catch(car_no_exist &kapsula) {
                     cout << kapsula.msg << endl;
@@ -197,8 +195,8 @@ int main(int argc, char* argv[]) {
 
                 cout << "LISTA" << endl << endl;
                 cout << endl << "Samochody dostarczone do klientów: " << endl;
-                for(int i = 0; i < sold_cars.size(); i++) {
-                    cout << i + 1 << ". " << endl << sold_cars.at(i) << endl;
+                for(int i = 0; i < sold_engine_vehicles.size(); i++) {
+                    cout << i + 1 << ". " << endl << sold_engine_vehicles.at(i) << endl;
                 }
                 break;
             }
@@ -220,10 +218,10 @@ int main(int argc, char* argv[]) {
 
                     case 1: {
 
-                        Car tmp;
+                        Engine_Vehicle tmp;
                         if(plik.is_open()) {
                             try {
-                                tmp = loadCarDataFile(W, plik);
+                                Car tmp = loadEngineVehicleDataFile<Car>(W, plik);
                             }
                             catch(false_door_count &kapsula){
                                 cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
@@ -231,16 +229,16 @@ int main(int argc, char* argv[]) {
                             }
                         } else {
                             try {
-                                tmp = loadCarData(W, K);
+                                Car tmp = loadEngineVehicleData<Car>(W, K);
                             }
                             catch(false_door_count &kapsula) {
                                 cout << kapsula.msg << endl;
                             }
                         }
 
-                        for (int i = 0; i < sold_cars.size(); i++) {
-                            if (tmp == sold_cars.at(i)) {
-                                Komis.buyCar(sold_cars.at(i), sold_cars);
+                        for (int i = 0; i < sold_engine_vehicles.size(); i++) {
+                            if (tmp == sold_engine_vehicles.at(i)) {
+                                Komis.buyCar(sold_engine_vehicles.at(i), sold_engine_vehicles);
                             }
                         }
                         break;
@@ -248,12 +246,12 @@ int main(int argc, char* argv[]) {
 
                     case 2: {
                         string new_owner;
-                        Car tmp;
+                        Engine_Vehicle tmp;
 
                         if(plik.is_open()) {
                             plik >> new_owner;
                             try {
-                                tmp = loadCarDataFile(W, plik);
+                                Car tmp = loadEngineVehicleDataFile<Car>(W, plik);
                             }
                             catch(false_door_count &kapsula){
                                 cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
@@ -263,14 +261,14 @@ int main(int argc, char* argv[]) {
                             cout << "Podaj nazwisko nowego właściciela: " << endl;
                             cin >> new_owner;
                             try {
-                                tmp = loadCarData(W, K);
+                                Car tmp = loadEngineVehicleData<Car>(W, K);
                             }
                             catch(false_door_count &kapsula) {
                                 cout << kapsula.msg << endl;
                             }
                         }
 
-                        Komis.sellCar(tmp, new_owner, sold_cars);
+                        Komis.sellCar(tmp, new_owner, sold_engine_vehicles);
                         break;
                     }
 
@@ -284,11 +282,11 @@ int main(int argc, char* argv[]) {
             case 7: {
 
                 cout << "LAKIERNIK" << endl << endl;
-                Car tmp;
+                Engine_Vehicle tmp;
                 int tmp_i;
                 if(plik.is_open()) {
                     try {
-                        tmp = loadCarDataFile(W, plik);
+                        Car tmp = loadEngineVehicleDataFile<Car>(W, plik);
                     }
                     catch(false_door_count &kapsula){
                         cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
@@ -296,20 +294,20 @@ int main(int argc, char* argv[]) {
                     }
                 } else {
                     try {
-                        tmp = loadCarData(W, 0);
+                        Car tmp = loadEngineVehicleData<Car>(W, 0);
                     }
                     catch(false_door_count &kapsula) {
                         cout << kapsula.msg;
                     }
                 }
                 try {
-                    tmp_i = findCar(tmp, sold_cars);
+                    tmp_i = findEngineVehicle(tmp, sold_engine_vehicles);
                 }
                 catch (car_no_exist &kapsula) {
                     cout << kapsula.msg << endl;
                 }
 
-                Varnisher::changeColor(sold_cars.at(tmp_i), plik);
+                Varnisher::changeColor(sold_engine_vehicles.at(tmp_i), plik);
             }
 
             default: {

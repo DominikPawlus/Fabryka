@@ -24,22 +24,7 @@ bool operator==(const Car& car1, const Car& car2) {
     }
 } // capacity, fuel i efficiency są zmienne - niepotrzebne do porównania
 
-int Car::go(float km, std::vector<Car> &garage) {
-    for(int i = 0; i < garage.size(); i++) {
-        if(garage.at(i) == *this) {
-            garage.at(i).mileage += km;
-            garage.at(i).fuel_amount -= km / 100 * garage.at(i).getEfficiency();
-            std::cout << "Przejechałeś " << km << " kilometrów samochodem: " << std::endl << garage.at(i) << std::endl;
-            return garage.at(i).mileage;
-        }
-    }
-    return 0;
-};
 
 int Car::getDoorCount() const {
     return this->door_count;
 };
-
-void Car::splitMileage() {
-    this -> mileage /= 2;
-}

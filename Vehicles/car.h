@@ -20,11 +20,7 @@ class Car : public Engine_Vehicle {
 
     friend bool operator==(const Car& car1, const Car& car2);
 
-    int go(float km, std::vector<Car> &garage);
-
     int getDoorCount() const;
-
-    void splitMileage();
 };
 
 #endif //CAR_H

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include "Vehicles/car.h"
+#include "Vehicles/motorcycle.h"
 
 
 struct false_door_count {
@@ -16,10 +17,12 @@ struct car_no_exist {
     std::string msg = "Podany samochód nie istnieje.";
 };
 
-Car loadCarData(int W, int K);
+template <class T>
+T loadEngineVehicleData(int W, int K);
 
-Car loadCarDataFile(int W, std::ifstream &plik);
+template <class T>
+T loadEngineVehicleDataFile(int W, std::ifstream &plik);
 
-int findCar(Car car, std::vector<Car> &garage);
+int findEngineVehicle(const Engine_Vehicle& car, std::vector<Engine_Vehicle> &garage);
 
 #endif //PROCEDURES_H

@@ -7,6 +7,7 @@
 
 class Motorcycle : public Engine_Vehicle {
 public:
+
     Motorcycle(std::string owner, std::string color, std::string brand, int capacity, float fuel_amount, float efficiency);
 };
 
