@@ -24,9 +24,10 @@ int main(int argc, char* argv[]) {
 
 
     Factory Fabryka = Factory("Gigafactory");
+    Dealer<Car> Komis = Dealer<Car>();
+    Dealer<Motorcycle> Komis_M = Dealer<Motorcycle>();
+
     vector<Car> sold_cars;
-    vector<Motorcycle> sold_motorcycles;
-    Dealer Komis = Dealer();
 
     int W = 0;
 
@@ -85,6 +86,7 @@ int main(int argc, char* argv[]) {
                 string owner;
 
                 Car tmp;
+
                 if(plik.is_open()) {
                     try {
                         tmp = loadCarDataFile(W, plik);
@@ -125,7 +127,6 @@ int main(int argc, char* argv[]) {
                 cout << "DROGA" << endl << endl;
 
                 Car tmp;
-                int tmp_i;
                 if(plik.is_open()) {
                     try {
                         tmp = loadCarDataFile(W, plik);
