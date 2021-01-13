@@ -5,9 +5,10 @@
 #include "Factory/factory.h"
 #include "Vehicles/car.h"
 #include "Vehicles/motorcycle.h"
+#include "Vehicles/bike.h"
 #include "procedures.h"
-#include "dealer.h"
-#include "varnisher.h"
+#include "Services/dealer.h"
+#include "Services/varnisher.h"
 
 using namespace std;
 
@@ -22,17 +23,23 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    Factory<Car> BMW = Factory<Car>("BMW", 500, 90, 11.5);
+    Factory<Car> Audi = Factory<Car>("Audi", 400, 80, 8.2);
+    Factory<Car> Mercedes = Factory<Car>("Mercedes", 600, 60, 10.4);
 
-    Factory Fabryka = Factory("Gigafactory");
+    Factory<Motorcycle> Kawasaki = Factory<Motorcycle>("Kawasaki", 20, 15, 1.8);
+    Factory<Motorcycle> Honda = Factory<Motorcycle>("Honda", 30, 12, 1.6);
 
-    Dealer<Car> Komis = Dealer<Car>();
-    Dealer<Motorcycle> Komis_M = Dealer<Motorcycle>();
+    Factory<Bike> Romet = Factory<Bike>("Romet", 5, 0, 0);
 
-    vector<Car> sold_cars;
+    Dealer<Car> Autokomis = Dealer<Car>();
+    Dealer<Motorcycle> Motorkomis = Dealer<Motorcycle>();
+    Dealer<Bike> Bajkomis = Dealer<Bike>();
 
     int W = 0;
 
     do {
+
         if(plik.is_open()) {
             cout << endl << "============================" << endl;
         } else {
