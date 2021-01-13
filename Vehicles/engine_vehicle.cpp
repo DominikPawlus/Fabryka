@@ -24,10 +24,32 @@ bool operator==(const Engine_Vehicle& e_vehicle1, const Engine_Vehicle& e_vehicl
     }
 } // capacity, fuel i efficiency są zmienne - niepotrzebne do porównania
 
+float Engine_Vehicle::go(float km, std::vector<Engine_Vehicle> &garage) {
+
+    if(!this -> license_plate) {
+        std::cout << "Żeby móc jeździć pojazdem, musisz go zarejestrować!" << std::endl;
+        return 0;
+    }
+
+    for(int i = 0; i < garage.size(); i++) {
+        if(garage.at(i) == *this) {
+            garage.at(i).mileage += km;
+            garage.at(i).fuel_amount -= km / 100 * garage.at(i).getEfficiency();
+            std::cout << "Przejechałeś " << km << " kilometrów motocyklem o rejestracji: " << std::endl << garage.at(i).number << std::endl;
+            return garage.at(i).mileage;
+        }
+    }
+    return 0;
+};
+
 float Engine_Vehicle::getFuelAmount() const {
     return this -> fuel_amount;
 }
 
 float Engine_Vehicle::getEfficiency() const {
     return this -> efficiency;
+}
+
+bool Engine_Vehicle::isRegistered() {
+    return this -> license_plate;
 }

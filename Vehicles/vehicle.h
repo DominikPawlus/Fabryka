@@ -10,7 +10,7 @@ protected:
 
     std::string brand;
     int capacity;
-    int mileage = 0;
+    float mileage = 0;
 
 public:
 
@@ -23,12 +23,8 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const Vehicle& vehicle);
     friend bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2);
 
-    std::string getColor() const;
-
     std::string getBrand();
-
     int getCapacity() const;
-
     int getMileage() const;
 };
 
