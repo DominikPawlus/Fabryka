@@ -20,6 +20,9 @@ public:
     Vehicle();
     Vehicle(std::string owner, std::string color, std::string brand, int capacity);
 
+    friend std::ostream& operator<<(std::ostream& out, const Vehicle& vehicle);
+    friend bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2);
+
     std::string getColor() const;
 
     std::string getBrand();

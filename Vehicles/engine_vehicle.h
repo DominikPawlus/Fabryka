@@ -16,7 +16,8 @@ public:
     Engine_Vehicle();
     Engine_Vehicle(std::string owner, std::string color, std::string brand, int capacity, float fuel_amount, float efficiency);
 
-    friend bool operator==(const Engine_Vehicle& car1, const Engine_Vehicle& car2);
+    friend std::ostream& operator<<(std::ostream& out, const Engine_Vehicle& e_vehicle);
+    friend bool operator==(const Engine_Vehicle& e_vehicle1, const Engine_Vehicle& e_vehicle2);
 
     float getFuelAmount() const;
 

@@ -10,14 +10,10 @@ class Bike : public Vehicle {
         bool basket;
 
     public:
+
         Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity);
 
-        int getCapacity() {
-            if(this -> basket) {
-                this -> capacity += 10;
-            }
-            return this -> capacity;
-        }
+        bool isBasket();
 };
 
 #endif //BIKE_H

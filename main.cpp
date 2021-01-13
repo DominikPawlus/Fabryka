@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "factory.h"
+#include "Factory/factory.h"
 #include "Vehicles/car.h"
 #include "Vehicles/motorcycle.h"
 #include "procedures.h"
@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
 
 
     Factory Fabryka = Factory("Gigafactory");
+
     Dealer<Car> Komis = Dealer<Car>();
     Dealer<Motorcycle> Komis_M = Dealer<Motorcycle>();
 
