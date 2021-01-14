@@ -16,7 +16,7 @@ public:
 
     void addNew(std::string color, bool basket);
 
-    Bike * sell(const Bike &motor);
+    Bike * sell(const Bike &bike);
 };
 
 template <class T>

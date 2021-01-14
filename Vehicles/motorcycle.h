@@ -10,6 +10,8 @@ class Motorcycle : public Engine_Vehicle {
 
 public:
 
+    Motorcycle() = default;
+
     Motorcycle(std::string owner, std::string color, std::string brand, int capacity, float fuel_amount, float efficiency);
 
     friend std::ostream& operator<<(std::ostream& out, const Motorcycle& motor);

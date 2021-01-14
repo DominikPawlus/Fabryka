@@ -14,6 +14,8 @@ class Bike : public Vehicle {
 
     public:
 
+        Bike() = default;
+
         Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity);
 
         float go(float km);

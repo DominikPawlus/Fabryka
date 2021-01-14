@@ -83,21 +83,17 @@ int main(int argc, char* argv[]) {
 
                 case (1): {
 
-                    Car *tmp;
+                    Car tmp;
                     tmp = loadCarData(W, plik);
 
-                    cout << tmp->getDoorCount() << endl;
-                    cout << "Marka: " << tmp->getBrand() << endl;
-
-                    if (tmp->getBrand() == "BMW") {
-                        cout << "w ifie: " << tmp->getDoorCount() << endl;
-                        BMW.addNew(tmp->color, tmp->getDoorCount());
+                    if (tmp.getBrand() == "BMW") {
+                        BMW.addNew(tmp.color, tmp.getDoorCount());
                     }
-                    if (tmp->getBrand() == "Audi") {
-                        Audi.addNew(tmp->color, tmp->getDoorCount());
+                    if (tmp.getBrand() == "Audi") {
+                        Audi.addNew(tmp.color, tmp.getDoorCount());
                     }
-                    if (tmp->getBrand() == "Mercedes") {
-                        Mercedes.addNew(tmp->color, tmp->getDoorCount());
+                    if (tmp.getBrand() == "Mercedes") {
+                        Mercedes.addNew(tmp.color, tmp.getDoorCount());
                     }
 
                     break;
@@ -105,14 +101,14 @@ int main(int argc, char* argv[]) {
 
                 case (2): {
 
-                    Motorcycle *tmp;
+                    Motorcycle tmp;
                     tmp = loadMotorData(W, plik);
 
-                    if (tmp->getBrand() == "Kawasaki") {
-                        Kawasaki.addNew(tmp->color);
+                    if (tmp.getBrand() == "Kawasaki") {
+                        Kawasaki.addNew(tmp.color);
                     }
-                    if (tmp->getBrand() == "Honda") {
-                        Honda.addNew(tmp->color);
+                    if (tmp.getBrand() == "Honda") {
+                        Honda.addNew(tmp.color);
                     }
 
                     break;
@@ -120,9 +116,9 @@ int main(int argc, char* argv[]) {
 
                 case (3): {
 
-                    Bike *tmp;
+                    Bike tmp;
                     tmp = loadBikeData(W, plik);
-                    Romet.addNew(tmp->color, tmp->isBasket());
+                    Romet.addNew(tmp.color, tmp.isBasket());
 
                     break;
                 }
@@ -152,21 +148,19 @@ int main(int argc, char* argv[]) {
 
                     case (1): {
 
-                        Car *tmp;
+                        Car tmp;
                         string new_owner;
 
                         tmp = loadCarData(W, plik);
-                        cout << tmp->getBrand() << endl;
 
-                        //if (tmp->getBrand() == "BMW") {
+                        if (tmp.getBrand() == "BMW") {
                             cars.push_back(*BMW.sell(tmp));
-                            cout << cars.size() << endl;
-                        //}
+                        }
 
-                        if (tmp->getBrand() == "Audi") {
+                        if (tmp.getBrand() == "Audi") {
                             cars.push_back(*Audi.sell(tmp));
                         }
-                        if (tmp->getBrand() == "Mercedes") {
+                        if (tmp.getBrand() == "Mercedes") {
                             cars.push_back(*Mercedes.sell(tmp));
                         }
 
@@ -177,10 +171,9 @@ int main(int argc, char* argv[]) {
                             cin >> new_owner;
                         }
 
-                        cars.end() -> owner = new_owner;
+                        cars.end()->owner = new_owner;
 
                         cout << "Sprzedano samochód." << endl;
-
                         break;
                     }
 
@@ -189,7 +182,7 @@ int main(int argc, char* argv[]) {
                         Motorcycle *tmp;
                         string new_owner;
 
-                        tmp = loadMotorData(W, plik);
+                        *tmp = loadMotorData(W, plik);
 
                         if (tmp->getBrand() == "Kawasaki") {
                             motorcycles.push_back(*Kawasaki.sell(*tmp));
@@ -208,7 +201,6 @@ int main(int argc, char* argv[]) {
                         motorcycles.end()->owner = new_owner;
 
                         cout << "Sprzedano motocykl." << endl;
-
                         break;
                     }
 
@@ -217,7 +209,7 @@ int main(int argc, char* argv[]) {
                         Bike *tmp;
                         string new_owner;
 
-                        tmp = loadBikeData(W, plik);
+                        *tmp = loadBikeData(W, plik);
                         bikes.push_back(*Romet.sell(*tmp));
 
                         if (plik.is_open()) {
@@ -237,8 +229,8 @@ int main(int argc, char* argv[]) {
                     default: {
                         break;
                     }
-                        break;
                 }
+                break;
             }
             case 3: {
 
@@ -256,13 +248,12 @@ int main(int argc, char* argv[]) {
                 switch (K) {
 
                     case (1): {
-                        Car *tmp = loadCarData(W, plik);
-                        int n = findVehicle<Car>(*tmp, cars);
+                        int n = findVehicle<Car>(loadCarData(W, plik), cars);
                         Office::registerVehicle(cars.at(n), plik);
                         break;
                     }
                     case (2): {
-                        int n = findVehicle<Motorcycle>(*loadMotorData(W, plik), motorcycles);
+                        int n = findVehicle<Motorcycle>(loadMotorData(W, plik), motorcycles);
                         Office::registerVehicle(motorcycles.at(n), plik);
                         break;
                     }
@@ -312,8 +303,8 @@ int main(int argc, char* argv[]) {
 
                     case (3): {
 
-                        Bike *tmp = loadBikeData(W, plik);
-                        int n = findVehicle<Bike>(*tmp, bikes);
+                        Bike tmp = loadBikeData(W, plik);
+                        int n = findVehicle<Bike>(tmp, bikes);
                         bikes.at(n).go(km);
 
                         break;

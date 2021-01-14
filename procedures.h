@@ -19,11 +19,11 @@ struct car_no_exist {
 };
 
 
-Car * loadCarData(int W, std::ifstream &plik);
+Car loadCarData(int W, std::ifstream &plik);
 
-Motorcycle * loadMotorData(int W, std::ifstream &plik);
+Motorcycle loadMotorData(int W, std::ifstream &plik);
 
-Bike * loadBikeData(int W, std::ifstream &plik);
+Bike loadBikeData(int W, std::ifstream &plik);
 
 template <typename T>
 int findVehicle(T vehicle, std::vector<T> &garage) {
