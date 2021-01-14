@@ -24,6 +24,7 @@ public:
     friend bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2);
 
     std::string getBrand();
+    std::string getColor();
     int getCapacity() const;
     int getMileage() const;
 };

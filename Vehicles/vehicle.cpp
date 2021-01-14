@@ -23,12 +23,16 @@ bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2) {
     }
 }
 
-int Vehicle::getCapacity() const {
-    return this -> capacity;
-}
-
 std::string Vehicle::getBrand() {
     return this -> brand;
+}
+
+std::string Vehicle::getColor() {
+    return this -> color;
+}
+
+int Vehicle::getCapacity() const {
+    return this -> capacity;
 }
 
 int Vehicle::getMileage() const {

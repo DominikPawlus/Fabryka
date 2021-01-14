@@ -10,10 +10,10 @@ Car * loadCarData(int W, std::ifstream &plik) {
 
     if(plik.is_open()){
 
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             plik >> owner;
         }
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             plik >> J;
         }
 
@@ -25,7 +25,7 @@ Car * loadCarData(int W, std::ifstream &plik) {
         }
     } else {
 
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             std::cout << "Podaj właściciela: " << std::endl;
             std::cin >> owner;
         }
@@ -46,7 +46,7 @@ Car * loadCarData(int W, std::ifstream &plik) {
     }
 
     if(J == 1) {
-        brand = "BWM";
+        brand = "BMW";
     }
     if(J == 2) {
         brand = "Audi";
@@ -55,6 +55,7 @@ Car * loadCarData(int W, std::ifstream &plik) {
         brand = "Mercedes";
     }
 
+    std::cout << brand << std::endl;
     Car tmp = Car(owner, color, brand, door_count, 0, 0, 0);
 
     return &tmp;
@@ -145,28 +146,3 @@ Bike * loadBikeData(int W, std::ifstream &plik) {
     return &tmp;
 }
 
-template <typename T>
-int findVehicle(T vehicle, std::vector<T> &garage) {
-
-    for(int i = 0; i < garage.size(); i++) {
-        if(vehicle == garage.at(i)) {
-            return i;
-        }
-    }
-
-    car_no_exist kapsula;
-    throw kapsula;
-}
-
-template <typename T>
-int findNumber(std::vector<T> garage, const std::string& number) {
-
-    for(int i = 0; i < garage.size(); i++) {
-        if(number == garage.at(i).number) {
-            return i;
-        }
-    }
-
-    car_no_exist kapsula;
-    throw kapsula;
-}
