@@ -4,13 +4,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "Vehicles/engine_vehicle.h"
+#include "../Vehicles/engine_vehicle.h"
 
 class Office {
 
 public:
 
-    static void register(Engine_Vehicle &e_vehicle, std::ifstream &plik);
+    static void registerVehicle(Engine_Vehicle &e_vehicle, std::ifstream &plik);
 
 };
 

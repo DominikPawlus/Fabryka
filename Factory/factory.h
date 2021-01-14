@@ -7,6 +7,7 @@
 
 template <class T>
 class Factory {
+
     private:
         std::vector<T> garage;
         std::string brand;

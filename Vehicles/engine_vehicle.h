@@ -25,7 +25,7 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const Engine_Vehicle &e_vehicle);
     friend bool operator==(const Engine_Vehicle &e_vehicle1, const Engine_Vehicle &e_vehicle2);
 
-    float go(float km, std::vector<Engine_Vehicle> &garage);
+    float go(float km);
 
     float getFuelAmount() const;
     float getEfficiency() const;

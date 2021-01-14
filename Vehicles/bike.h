@@ -16,7 +16,7 @@ class Bike : public Vehicle {
 
         Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity);
 
-        float go(float km, std::vector<Bike> &garage);
+        float go(float km);
 
         bool isBasket();
 };

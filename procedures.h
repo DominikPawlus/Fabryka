@@ -18,10 +18,17 @@ struct car_no_exist {
     std::string msg = "Podany samochód nie istnieje.";
 };
 
-template <class T>
-T * loadData(int W, int K, std::ifstream &plik);
 
-template <class T>
+Car * loadCarData(int W, std::ifstream &plik);
+
+Motorcycle * loadMotorData(int W, std::ifstream &plik);
+
+Bike * loadBikeData(int W, std::ifstream &plik);
+
+template <typename T>
 int findVehicle(T vehicle, std::vector<T> &garage);
+
+template <typename T>
+int findNumber(std::vector<T> garage, const std::string& number);
 
 #endif //PROCEDURES_H

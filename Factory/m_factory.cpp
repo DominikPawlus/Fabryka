@@ -1,18 +1,28 @@
 #include "m_factory.h"
 
-void MotorFactory::addNew(std::string color, int door_count) {
+template <class T>
+MotorFactory<T>::MotorFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) {
+    this -> brand = std::move(brand);
+    this -> capacity = capacity;
+    this -> fuel_amount = fuel_amount;
+    this -> efficiency - efficiency;
+}
+
+template <class T>
+void MotorFactory<T>::addNew(std::string color) {
 
     std::string owner = "Fabryka";
     Motorcycle motor = Motorcycle(owner, std::move(color), this -> brand, this -> capacity, this -> fuel_amount, this -> efficiency);
-    this -> garage.push_back(car);
+    this -> garage.push_back(motor);
 
 }
 
-Motorcycle * MotorFactory::sell(const Motorcycle& motor, const std::string& motor_name) {
+template <class T>
+Motorcycle * MotorFactory<T>::sell(const Motorcycle& motor) {
 
     for(int i = 0; i < this -> garage.size(); i++) {
         if(this -> garage.at(i) == motor) {
-            Motorcycle * tmp = new Motorcycle(vehicle_name, this -> garage.at(i).getColor(), garage.at(i).getBrand(), this -> garage.at(i).getCapacity(), garage.at(i).getFuelAmount(), garage.at(i).getEfficiency());
+            Motorcycle * tmp = new Motorcycle("Fabryka", this -> garage.at(i).getColor(), this -> garage.at(i).getBrand(), this -> garage.at(i).getCapacity(), this -> garage.at(i).getFuelAmount(), this -> garage.at(i).getEfficiency());
             this -> garage.erase(this -> garage.begin() + i);
             return tmp;
         }

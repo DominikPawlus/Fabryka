@@ -1,18 +1,22 @@
 #include <iostream>
 #include <string>
 
-#include "Vehicles/motorcycle.h"
+#include "../Vehicles/motorcycle.h"
+#include "../Factory/factory.h"
 
 #ifndef M_FACTORY_H
 #define M_FACTORY_H
 
-class MotorFactory : public Factory {
+template <class T>
+class MotorFactory : public Factory<T> {
 
 public:
 
-    void addNew(std::string color, int door_count);
+    explicit MotorFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency);
 
-    Motorcycle * sell(const Motorcycle &motor, const std::string &motor_name);
+    void addNew(std::string color);
+
+    Motorcycle * sell(const Motorcycle &motor);
 };
 
 #endif //M_FACTORY_H

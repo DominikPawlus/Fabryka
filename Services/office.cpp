@@ -1,8 +1,14 @@
 #include "office.h"
 
-void Office::register(Engine_Vehicle &e_vehicle, std::ifstream &plik) {
+void Office::registerVehicle(Engine_Vehicle &e_vehicle, std::ifstream &plik) {
 
-    int numer =( std::rand() % 99999 ) + 10000;
+    int numer;
+    if(plik.is_open()) {
+        numer = 12345;
+    } else {
+        numer = ( std::rand() % 99999 ) + 10000;
+    }
+
     std::string number = std::to_string(numer);
     std::string prefix;
     int W;
@@ -29,7 +35,7 @@ void Office::register(Engine_Vehicle &e_vehicle, std::ifstream &plik) {
                 "(15) -wielkopolskie\n"
                 "(16) -zachodniopomorskie" <<
             std::endl;
-            cin >> W;
+            std::cin >> W;
         }
 
     switch(W) {

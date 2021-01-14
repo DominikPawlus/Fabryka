@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <vector>
-#include "Vehicles/vehicle.h"
-#include "procedures.h"
+#include "../Vehicles/vehicle.h"
+#include "../procedures.h"
 
 template<class T>
 class Dealer {
