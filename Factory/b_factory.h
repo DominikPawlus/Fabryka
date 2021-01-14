@@ -14,7 +14,7 @@ public:
 
     explicit BikeFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency);
 
-    void addNew(std::string color, bool basket);
+    void addNew(std::string color, bool basket, int gears);
 
     Bike * sell(const Bike &bike);
 };
@@ -24,7 +24,7 @@ BikeFactory<T>::BikeFactory(const std::string& brand, int capacity, float fuel_a
 }
 
 template <class T>
-void BikeFactory<T>::addNew(std::string color, bool basket) {
+void BikeFactory<T>::addNew(std::string color, bool basket, int gears) {
 
     std::string owner = "Fabryka";
     int capacity = 5;
@@ -32,7 +32,7 @@ void BikeFactory<T>::addNew(std::string color, bool basket) {
         capacity += 10;
     }
 
-    Bike bike = Bike(owner, std::move(color), this -> brand, basket, capacity);
+    Bike bike = Bike(owner, std::move(color), this -> brand, basket, capacity, gears);
     this -> garage.push_back(bike);
 }
 
@@ -41,7 +41,7 @@ Bike * BikeFactory<T>::sell(const Bike& bike) {
 
     for(int i = 0; i < this -> garage.size(); i++) {
         if(this -> garage.at(i) == bike) {
-            Bike * tmp = new Bike("Fabryka", this -> garage.at(i).getColor(), this -> garage.at(i).getBrand(), this -> garage.at(i).isBasket(), this -> garage.at(i).getCapacity());
+            Bike * tmp = new Bike("Fabryka", this -> garage.at(i).getColor(), this -> garage.at(i).getBrand(), this -> garage.at(i).isBasket(), this -> garage.at(i).getCapacity(), this -> garage.at(i).getGears());
             this -> garage.erase(this -> garage.begin() + i);
             return tmp;
         }

@@ -10,17 +10,18 @@ class Bike : public Vehicle {
     private:
 
         bool basket;
-        int gears;
+        int gears = 8;
 
     public:
 
         Bike() = default;
 
-        Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity);
+        Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity, int gears);
 
         float go(float km);
 
-        bool isBasket();
+        bool isBasket() const;
+        int getGears() const;
 };
 
 #endif //BIKE_H

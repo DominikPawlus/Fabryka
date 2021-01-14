@@ -19,8 +19,6 @@ class Car : public Engine_Vehicle {
     friend std::ostream& operator<<(std::ostream& out, const Car& car);
     friend bool operator==(const Car& car1, const Car& car2);
 
-    void splitMileage();
-
     int getDoorCount() const;
 };
 

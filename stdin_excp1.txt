@@ -1,17 +1,51 @@
-1   1   Biały   5
-1   2   Niebieski   4
-1   3   Srebrny 3
-2   Audi    Biały   BŁĄD   Nowak
-2   Mercedes    Niebieski   4   Kowalski
-2   BMW Srebrny 3   Seba
-3   Nowak   Audi    Biały   5   400
-3   Kowalski Mercedes   Niebieski   4   250
-3   Seba    BMW Niebieski 3   15
-3   Seba    BMW Srebrny 3   25
-4   Nowak   Audi    Biały   5
+1   1   1   Czarny  5
+1   1   2   Szary   3
+1   1   3   Biały   BŁĄD
+1   2   1   Zielony
+1   2   2   Czerwony
+1   3   Niebieski   1   7
+1   3   Fioletowy   2   5
+
+2   1   1   Czarny  5   Kowalski
+2   1   2   Szary   3   Nowak
+2   1   3   Biały   5   Smith
+2   2   1   Zielony Kasztan
+2   2   2   Czerwony    Zasada
+2   3   Niebieski   1   7   Kot
+2   3   Fioletowy   2   5   Psikuta
+
 5
-6   1   Nowak   Audi    Biały   5
-6   2   Kowalski    Komis    Audi    Biały   5
-7   Kowalski    Audi    Biały   5   Czarny
+
+3   1   Kowalski    1   Czarny  5   1
+3   1   Nowak   2   Szary   3   2
+3   1   Smith   3   Biały   5   3
+3   2   Kasztan 1   Zielony 4
+3   2   Zasada  2   Czerwony    5
+
 5
+
+4   1   500 D12345
+4   1   330 C12345
+4   1   100 L12345
+4   2   125 F12345
+4   2   30  E12345
+4   3   25  Kot Niebieski   1   7
+4   3   12  Psikuta Fioletowy   2   5
+
+5
+
+6   1   2   D12345
+6   1   1   D12345  Król
+6   2   2   F12345
+6   2   1   F12345  Twardowski
+6   3   2   Psikuta Fioletowy   2   5
+6   3   1   Komis   Fioletowy   2   5       Brzęczyszczykiewicz
+
+5
+
+7   1   D12345  Złoty
+7   2   F12345  Różowy
+
+5
+
 0

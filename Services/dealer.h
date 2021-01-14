@@ -19,8 +19,11 @@ public:
 
     int buyPrice(T vehicle);
     int sellPrice(T vehicle);
-    void sell(const T& vehicle, std::vector<T> &garage);
-    void buy(const T& vehicle, const std::string& new_owner, std::vector<T> &garage);
+    void buy(const T& vehicle, std::vector<T> &garage);
+    void sell(const T& vehicle, const std::string& new_owner, std::vector<T> &garage);
+
+    int getParkSize();
+    std::vector<T> showParking();
 
 };
 
@@ -51,10 +54,6 @@ public:
             price = 3000;
         }
 
-        if(typeid(T) == typeid(Motorcycle)) {
-            price /= 4;
-        }
-
         price -= vehicle.getMileage() / 2;
 
         return price;
@@ -71,11 +70,11 @@ public:
     }
 
     template<class T>
-    void Dealer<T>::sell(const T& vehicle, std::vector<T> &garage){
+    void Dealer<T>::buy(const T& vehicle, std::vector<T> &garage){
 
         for(int i = 0; i < garage.size(); i++) {
             if(vehicle == garage.at(i)) {
-                std::cout << "Sprzedałeś pojazd o rejestracji: " << std::endl << garage.at(i).number << std::endl << "za " << buyPrice(garage.at(i)) << " zł." << std::endl;
+                std::cout << "Sprzedałeś pojazd: " << std::endl << garage.at(i) << std::endl << "za " << buyPrice(garage.at(i)) << " zł." << std::endl;
                 garage.at(i).owner = "Komis";
 
                 if(garage.at(i).getBrand() == "BMW" || garage.at(i).getBrand() == "Honda") {
@@ -89,18 +88,30 @@ public:
     }
 
     template<class T>
-    void  Dealer<T>::buy(const T& vehicle, const std::string& new_owner, std::vector<T> &garage) {
+    void  Dealer<T>::sell(const T& vehicle, const std::string& new_owner, std::vector<T> &garage) {
 
         for(int i = 0; i < this -> parking.size(); i++) {
             if(vehicle == parking.at(i)) {
                 parking.at(i).owner = new_owner;
-                std::cout << "Kupiłeś samochód o rejestracji: " << std::endl << parking.at(i).number << std::endl << "za " << sellPrice(parking.at(i)) << " zł" << std::endl;
+
+                    std::cout << "Kupiłeś pojazd: " << std::endl << parking.at(i) << std::endl << "za " << sellPrice(parking.at(i)) << " zł" << std::endl;
 
                 garage.push_back(parking.at(i));
                 parking.erase(parking.begin() + i);
             }
         }
     }
+
+template<class T>
+int Dealer<T>::getParkSize() {
+    return this -> parking.size();
+}
+
+template<class T>
+std::vector<T> Dealer<T>::showParking() {
+    return this -> parking;
+}
+
 
 #endif //DEALER_H
 

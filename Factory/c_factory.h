@@ -28,7 +28,6 @@ template <class T>
 void CarFactory<T>::addNew(std::string color, int door_count) {
 
     std::string owner = "Fabryka";
-    std::cout << door_count << std::endl;
     Car *car = new Car(owner, std::move(color), this -> brand, door_count, this -> capacity, this -> fuel_amount, this -> efficiency);
     this -> garage.push_back(*car);
 }

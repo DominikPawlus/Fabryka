@@ -10,7 +10,8 @@ std::ostream& operator<<(std::ostream& out, const Motorcycle& motor) {
     out << "Właściciel: " << motor.owner << std::endl << "Kolor: " << motor.color << std::endl <<
         "Marka: " << motor.brand << std::endl <<
         "Przebieg: " << motor.mileage << std::endl << "Ładowność: " << motor.capacity << " kg" << std::endl <<
-        "Ilość paliwa: " << motor.fuel_amount << " l" << std::endl << "Spalanie: " << motor.efficiency << " l/100km" << std::endl;
+        "Ilość paliwa: " << motor.fuel_amount << " l" << std::endl << "Spalanie: " << motor.efficiency << " l/100km" << std::endl <<
+        "Nr tablicy rejestracyjnej: " << motor.number << std::endl;
     return out;
 }
 

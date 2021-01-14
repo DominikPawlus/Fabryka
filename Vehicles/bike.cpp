@@ -1,10 +1,6 @@
 #include "bike.h"
 
-Bike::Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity) : Vehicle(owner, color, brand, capacity), basket(basket) {
-}
-
-bool Bike::isBasket() {
-    return this -> basket;
+Bike::Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity, int gears) : Vehicle(owner, color, brand, capacity), basket(basket), gears(gears) {
 }
 
 float Bike::go(float km) {
@@ -14,3 +10,11 @@ float Bike::go(float km) {
             std::cout << "Spaliłeś " << kalorie << " kalorii." << std::endl;
             return this -> mileage;
 };
+
+bool Bike::isBasket() const {
+    return this -> basket;
+}
+
+int Bike::getGears() const {
+    return this -> gears;
+}

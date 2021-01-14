@@ -14,7 +14,7 @@ struct false_door_count {
     std::string msg = "Liczba drzwi musi być liczbą naturalną.";
 };
 
-struct car_no_exist {
+struct vehicle_no_exist {
     std::string msg = "Podany samochód nie istnieje.";
 };
 
@@ -34,7 +34,7 @@ int findVehicle(T vehicle, std::vector<T> &garage) {
         }
     }
 
-    car_no_exist kapsula;
+    vehicle_no_exist kapsula;
     throw kapsula;
 }
 
@@ -47,7 +47,7 @@ int findNumber(std::vector<T> &garage, const std::string& number) {
         }
     }
 
-    car_no_exist kapsula;
+    vehicle_no_exist kapsula;
     throw kapsula;
 }
 

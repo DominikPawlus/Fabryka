@@ -32,7 +32,7 @@ float Engine_Vehicle::go(float km) {
     }
     this -> mileage += km;
     this -> fuel_amount -= km / 100 * this -> getEfficiency();
-    std::cout << "Przejechałeś " << km << " kilometrów motocyklem o rejestracji: " << std::endl << this -> number << std::endl;
+    std::cout << "Przejechałeś " << km << " kilometrów pojazdem o rejestracji: " << std::endl << this -> number << std::endl;
     return this -> mileage;
 };
 

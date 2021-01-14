@@ -12,7 +12,8 @@ std::ostream& operator<<(std::ostream& out, const Car& car) {
     out << "Właściciel: " << car.owner << std::endl << "Kolor: " << car.color << std::endl <<
     "Marka: " << car.brand << std::endl << "Liczba drzwi: " << car.door_count << std::endl <<
     "Przebieg: " << car.mileage << std::endl << "Ładowność: " << car.capacity << " kg" << std::endl <<
-    "Ilość paliwa: " << car.fuel_amount << " l" << std::endl << "Spalanie: " << car.efficiency << " l/100km" << std::endl;
+    "Ilość paliwa: " << car.fuel_amount << " l" << std::endl << "Spalanie: " << car.efficiency << " l/100km" << std::endl <<
+    "Nr tablicy rejestracyjnej: " << car.number << std::endl;
     return out;
 }
 
@@ -24,9 +25,6 @@ bool operator==(const Car& car1, const Car& car2) {
     }
 } // capacity, fuel i efficiency są zmienne - niepotrzebne do porównania
 
-void Car::splitMileage() {
-    this -> mileage /= 2;
-}
 
 int Car::getDoorCount() const {
     return this -> door_count;

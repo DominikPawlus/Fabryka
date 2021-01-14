@@ -23,6 +23,8 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const Vehicle& vehicle);
     friend bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2);
 
+    void splitMileage();
+
     std::string getBrand();
     std::string getColor();
     int getCapacity() const;

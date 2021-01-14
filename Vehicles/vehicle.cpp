@@ -23,6 +23,10 @@ bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2) {
     }
 }
 
+void Vehicle::splitMileage() {
+    this -> mileage /= 2;
+}
+
 std::string Vehicle::getBrand() {
     return this -> brand;
 }

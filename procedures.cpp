@@ -13,12 +13,8 @@ Car loadCarData(int W, std::ifstream &plik) {
         if(W != 1 && W != 2) {
             plik >> owner;
         }
-        if(W != 1 && W != 2) {
-            plik >> J;
-        }
 
-        plik >> color;
-        plik >> door_count;
+        plik >> J >> color >> door_count;
         if (plik.fail()) {
             false_door_count kapsula;
             throw kapsula;
@@ -35,7 +31,7 @@ Car loadCarData(int W, std::ifstream &plik) {
         std::cin >> J;
         std::cout << "Podaj kolor: " << std::endl;
         std::cin >> color;
-        std::cout << "Podaj liczbę drzwi: ";
+        std::cout << "Podaj liczbę drzwi: " << std::endl;
         std::cin >> door_count;
 
         if (std::cin.fail()) {
@@ -68,17 +64,14 @@ Motorcycle loadMotorData(int W, std::ifstream &plik) {
 
     if(plik.is_open()){
 
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             plik >> owner;
         }
-        if(W != 1) {
-            plik >> J;
-        }
 
-        plik >> color;
+        plik >> J >> color;
     } else {
 
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             std::cout << "Podaj właściciela: " << std::endl;
             std::cin >> owner;
         }
@@ -98,7 +91,6 @@ Motorcycle loadMotorData(int W, std::ifstream &plik) {
     }
 
     Motorcycle tmp = Motorcycle(owner, color, brand, 0, 0, 0);
-
     return tmp;
 }
 
@@ -108,27 +100,30 @@ Bike loadBikeData(int W, std::ifstream &plik) {
     std::string brand = "Romet";
     std::string color;
     bool basket;
+    int gears;
     int J;
 
     if(plik.is_open()){
 
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             plik >> owner;
         }
 
-        plik >> color >> J;
+        plik >> color >> J >> gears;
     } else {
 
-        if(W != 1) {
+        if(W != 1 && W != 2) {
             std::cout << "Podaj właściciela: " << std::endl;
             std::cin >> owner;
         }
 
         std::cout << "Podaj kolor: " << std::endl;
         std::cin >> color;
-        std::cout << "Czy rower posiada koszyk?";
+        std::cout << "Czy rower posiada koszyk?" << std::endl;
         std::cout << "(1) - tak" << std::endl << "(2) - nie" << std::endl;
         std::cin >> J;
+        std::cout << "Podaj liczbę przełożeń:" << std::endl;
+        std::cin >> gears;
     }
 
     if(J == 1) {
@@ -138,8 +133,7 @@ Bike loadBikeData(int W, std::ifstream &plik) {
         basket = false;
     }
 
-    Bike tmp = Bike(owner, color, brand, basket, 0);
-
+    Bike tmp = Bike(owner, color, brand, basket, 0, gears);
     return tmp;
 }
 
