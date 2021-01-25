@@ -27,8 +27,8 @@
 4   1   500 D12345
 4   1   330 C12345
 4   1   100 L12345
-4   2   125 F12345
-4   2   30  E12345
+4   1   125 F12345
+4   1   30  E12345
 4   3   25  Kot Niebieski   1   7
 4   3   12  Psikuta Fioletowy   2   5
 
@@ -36,15 +36,15 @@
 
 6   1   2   D12345
 6   1   1   D12345  Król
-6   2   2   F12345
-6   2   1   F12345  Twardowski
+6   1   2   F12345
+6   1   1   F12345  Twardowski
 6   3   2   Psikuta Fioletowy   2   5
 6   3   1   Komis   Fioletowy   2   5       Brzęczyszczykiewicz
 
 5
 
-7   1   D12345  Złoty
-7   2   F12345  Różowy
+7   D12345  Złoty
+7   F12345  Różowy
 
 5
 

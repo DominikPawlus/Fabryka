@@ -33,12 +33,10 @@ int main(int argc, char* argv[]) {
 
     Factory<Bike> Romet = Factory<Bike>("Romet", 5, 0, 0);
 
-    Dealer<Car> Autokomis = Dealer<Car>();
-    Dealer<Motorcycle> Motorkomis = Dealer<Motorcycle>();
+    Dealer<Engine_Vehicle> Autokomis = Dealer<Engine_Vehicle>();
     Dealer<Bike> Bajkomis = Dealer<Bike>();
 
-    vector<Car*> cars;
-    vector<Motorcycle*> motorcycles;
+    vector<Engine_Vehicle*> engine_vehicles;
     vector<Bike*> bikes;
 
     int W = 0;
@@ -76,77 +74,77 @@ int main(int argc, char* argv[]) {
                     cin >> K;
                 }
 
-            switch (K) {
+                switch (K) {
 
-                case (1): {
+                    case (1): {
 
-                    Car* tmp;
-                    try {
-                        tmp = loadCarData(W, plik);
-                    }
-                    catch(false_brand &kapsula) {
-                        if(plik.is_open()) {
-                            cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
-                            exit(EXIT_FAILURE);
-                        } else {
-                            cout << kapsula.msg << endl;
-                            break;
+                        Car* tmp;
+                        try {
+                            tmp = loadCarData(W, plik);
                         }
-                    }
-                    catch(false_door_count &kapsula) {
-                        if(plik.is_open()) {
-                            cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
-                            exit(EXIT_FAILURE);
-                        } else {
-                            cout << kapsula.msg << endl;
-                            break;
+                        catch(false_brand &kapsula) {
+                            if(plik.is_open()) {
+                                cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                                exit(EXIT_FAILURE);
+                            } else {
+                                cout << kapsula.msg << endl;
+                                break;
+                            }
                         }
+                        catch(false_door_count &kapsula) {
+                            if(plik.is_open()) {
+                                cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                                exit(EXIT_FAILURE);
+                            } else {
+                                cout << kapsula.msg << endl;
+                                break;
+                            }
+                        }
+
+                        if (tmp->getBrand() == "BMW") {
+                            BMW.addNew(tmp->color, tmp->getDoorCount());
+                        }
+                        if (tmp->getBrand() == "Audi") {
+                            Audi.addNew(tmp->color, tmp->getDoorCount());
+                        }
+                        if (tmp->getBrand() == "Mercedes") {
+                            Mercedes.addNew(tmp->color, tmp->getDoorCount());
+                        }
+
+                        cout << "Wyprodukowano samochód." << endl;
+                        break;
                     }
 
-                    if (tmp->getBrand() == "BMW") {
-                        BMW.addNew(tmp->color, tmp->getDoorCount());
-                    }
-                    if (tmp->getBrand() == "Audi") {
-                        Audi.addNew(tmp->color, tmp->getDoorCount());
-                    }
-                    if (tmp->getBrand() == "Mercedes") {
-                        Mercedes.addNew(tmp->color, tmp->getDoorCount());
+                    case (2): {
+
+                        Motorcycle* tmp;
+                        tmp = loadMotorData(W, plik);
+
+                        if (tmp->getBrand() == "Kawasaki") {
+                            Kawasaki.addNew(tmp->color);
+                        }
+                        if (tmp->getBrand() == "Honda") {
+                            Honda.addNew(tmp->color);
+                        }
+
+                        cout << "Wyprodukowano motocykl." << endl;
+                        break;
                     }
 
-                    cout << "Wyprodukowano samochód." << endl;
-                    break;
+                    case (3): {
+
+                        Bike* tmp;
+                        tmp = loadBikeData(W, plik);
+                        Romet.addNew(tmp->color, tmp->isBasket(), tmp->getGears());
+
+                        cout << "Wyprodukowano rower." << endl;
+                        break;
+                    }
+
+                    default: {
+                        break;
+                    }
                 }
-
-                case (2): {
-
-                    Motorcycle* tmp;
-                    tmp = loadMotorData(W, plik);
-
-                    if (tmp->getBrand() == "Kawasaki") {
-                        Kawasaki.addNew(tmp->color);
-                    }
-                    if (tmp->getBrand() == "Honda") {
-                        Honda.addNew(tmp->color);
-                    }
-
-                    cout << "Wyprodukowano motocykl." << endl;
-                    break;
-                }
-
-                case (3): {
-
-                    Bike* tmp;
-                    tmp = loadBikeData(W, plik);
-                    Romet.addNew(tmp->color, tmp->isBasket(), tmp->getGears());
-
-                    cout << "Wyprodukowano rower." << endl;
-                    break;
-                }
-
-                default: {
-                    break;
-                }
-            }
 
                 break;
             }
@@ -175,14 +173,14 @@ int main(int argc, char* argv[]) {
 
                         try {
                             if (tmp->getBrand() == "BMW") {
-                                cars.push_back(BMW.sell(*tmp));
+                                engine_vehicles.push_back(BMW.sell(*tmp));
                             }
 
                             if (tmp->getBrand() == "Audi") {
-                                cars.push_back(Audi.sell(*tmp));
+                                engine_vehicles.push_back(Audi.sell(*tmp));
                             }
                             if (tmp->getBrand() == "Mercedes") {
-                                cars.push_back(Mercedes.sell(*tmp));
+                                engine_vehicles.push_back(Mercedes.sell(*tmp));
                             }
                         }
                         catch(vehicle_no_exist &kapsula) {
@@ -202,7 +200,7 @@ int main(int argc, char* argv[]) {
                             cin >> new_owner;
                         }
 
-                        cars.at(cars.size() - 1)->owner = new_owner;
+                        engine_vehicles.at(engine_vehicles.size() - 1)->owner = new_owner;
 
                         cout << "Sprzedano samochód." << endl;
                         break;
@@ -216,10 +214,10 @@ int main(int argc, char* argv[]) {
                         tmp = loadMotorData(W, plik);
 
                         if (tmp->getBrand() == "Kawasaki") {
-                            motorcycles.push_back(Kawasaki.sell(*tmp));
+                            engine_vehicles.push_back(Kawasaki.sell(*tmp));
                         }
                         if (tmp->getBrand() == "Honda") {
-                            motorcycles.push_back(Honda.sell(*tmp));
+                            engine_vehicles.push_back(Honda.sell(*tmp));
                         }
 
                         if (plik.is_open()) {
@@ -229,7 +227,7 @@ int main(int argc, char* argv[]) {
                             cin >> new_owner;
                         }
 
-                        motorcycles.at(motorcycles.size() - 1)->owner = new_owner;
+                        engine_vehicles.at(engine_vehicles.size() - 1)->owner = new_owner;
 
                         cout << "Sprzedano motocykl." << endl;
                         break;
@@ -263,6 +261,7 @@ int main(int argc, char* argv[]) {
                 }
                 break;
             }
+
             case 3: {
 
                 cout << "STAROSTWO - rejestracja pojazdu" << endl;
@@ -279,13 +278,14 @@ int main(int argc, char* argv[]) {
                 switch (K) {
 
                     case (1): {
-                        int n = findVehicle<Car>(loadCarData(W, plik), cars);
-                        Office::registerVehicle(*cars.at(n), plik);
+                        int n = findVehicle<Engine_Vehicle>(loadCarData(W, plik), engine_vehicles);
+                        Office::registerVehicle(*engine_vehicles.at(n), plik);
                         break;
                     }
+
                     case (2): {
-                        int n = findVehicle<Motorcycle>(loadMotorData(W, plik), motorcycles);
-                        Office::registerVehicle(*motorcycles.at(n), plik);
+                        int n = findVehicle<Engine_Vehicle>(loadMotorData(W, plik), engine_vehicles);
+                        Office::registerVehicle(*engine_vehicles.at(n), plik);
                         break;
                     }
                     default: {
@@ -307,7 +307,7 @@ int main(int argc, char* argv[]) {
                     plik >> K >> km;
                 } else {
                     cout << "Wybierz rodzaj pojazdu: " << endl;
-                    cout << "(1) - samochód" << endl << "(2) - motocykl" << endl << "(3) - rower" << endl;
+                    cout << "(1) - pojazd silnikowy" <<  endl << "(3) - rower" << endl;
                     cin >> K;
                     cout << "Podaj liczbę kilometrów: " << endl;
                     cin >> km;
@@ -320,13 +320,13 @@ int main(int argc, char* argv[]) {
                         if (plik.is_open()) {
                             plik >> number;
                         } else {
-                            cout << "Podaj numer tablicy rejestracyjnej samochodu: " << endl;
+                            cout << "Podaj numer tablicy rejestracyjnej: " << endl;
                             cin >> number;
                         }
 
                         int n;
                         try {
-                            n = findNumber<Car>(cars, number);
+                            n = findNumber<Engine_Vehicle>(engine_vehicles, number);
                         }
                         catch(vehicle_no_exist &kapsula) {
                             if(plik.is_open()) {
@@ -338,22 +338,7 @@ int main(int argc, char* argv[]) {
                             }
                         }
 
-                        cars.at(n)->go(km);
-
-                        break;
-                    }
-
-                    case (2): {
-
-                        if (plik.is_open()) {
-                            plik >> number;
-                        } else {
-                            cout << "Podaj numer tablicy rejestracyjnej motocykla: " << endl;
-                            cin >> number;
-                        }
-
-                        int n = findNumber<Motorcycle>(motorcycles, number);
-                        motorcycles.at(n)->go(km);
+                        engine_vehicles.at(n)->go(km);
 
                         break;
                     }
@@ -378,16 +363,10 @@ int main(int argc, char* argv[]) {
             case 5: {
 
                 cout << "LISTA" << endl << endl;
-                cout << "Samochody: " << endl << endl;
+                cout << "Pojazdy silnikowe: " << endl << endl;
 
-                for (int i = 0; i < cars.size(); i++) {
-                    cout << i + 1 << ". " << endl << *cars.at(i) << endl;
-                }
-
-                cout << "Motocykle: " << endl << endl;
-
-                for (int i = 0; i < motorcycles.size(); i++) {
-                    cout << i + 1 << ". " << endl << *motorcycles.at(i) << endl;
+                for (int i = 0; i < engine_vehicles.size(); i++) {
+                    cout << i + 1 << ". " << endl << *engine_vehicles.at(i) << endl;
                 }
 
                 cout << "Rowery: " << endl << endl;
@@ -410,7 +389,7 @@ int main(int argc, char* argv[]) {
                 } else {
 
                     cout << "Wybierz rodzaj pojazdu: " << endl;
-                    cout << "(1) - samochód" << endl << "(2) - motocykl" << endl << "(3) - rower" << endl;
+                    cout << "(1) - pojazd silnikowy" << endl << "(3) - rower" << endl;
                     cin >> K;
                 }
 
@@ -450,10 +429,10 @@ int main(int argc, char* argv[]) {
                                 cin >> new_owner;
                             }
 
-                            vector<Car*> parking = Autokomis.showParking();
-                            int n = findNumber<Car>(parking, number);
+                            vector<Engine_Vehicle*> parking = Autokomis.showParking();
+                            int n = findNumber<Engine_Vehicle>(parking, number);
 
-                            Autokomis.sell(*Autokomis.showParking().at(n), new_owner, cars);
+                            Autokomis.sell(*Autokomis.showParking().at(n), new_owner, engine_vehicles);
                         }
 
                         if(J == 2) {
@@ -465,68 +444,13 @@ int main(int argc, char* argv[]) {
                                 cin >> number;
                             }
 
-                            int n = findNumber<Car>(cars, number);
+                            int n = findNumber<Engine_Vehicle>(engine_vehicles, number);
 
-                            Autokomis.buy(*cars.at(n), cars);
+                            Autokomis.buy(*engine_vehicles.at(n), engine_vehicles);
                         }
 
                         break;
                     }
-
-                   case (2): {
-
-                       int J;
-                       if (plik.is_open()) {
-                           plik >> J;
-                       } else {
-                           cout << "(1) - kup motocykl" << endl << "(2) - sprzedaj motocykl " << endl;
-                           cin >> J;
-                       }
-
-                       if(J == 1) {
-
-                           cout << "Motocykle dostępne w komisie: " << endl;
-
-                           if(Motorkomis.getParkSize() == 0) {
-                               cout << "W komisie nie ma żadnych dostępnych motocykli." << endl;
-                               break;
-                           } else {
-                               for (int i = 0; i < Motorkomis.getParkSize(); i++) {
-                                   cout << i + 1 << ". " << endl << Motorkomis.showParking().at(i) << endl;
-                               }
-                           }
-
-                           string new_owner;
-                           if (plik.is_open()) {
-                               plik >> number >> new_owner;
-                           } else {
-                               cout << "Podaj numer tablicy rejestracyjnej motocykla: " << endl;
-                               cin >> number;
-                               cout << "Podaj nazwisko nowego właściciela: " << endl;
-                               cin >> new_owner;
-                           }
-
-                           vector<Motorcycle*> parking = Motorkomis.showParking();
-                           int n = findNumber<Motorcycle>(parking, number);
-
-                           Motorkomis.sell(*Motorkomis.showParking().at(n), new_owner, motorcycles);
-                       }
-
-                       if(J == 2) {
-
-                           if (plik.is_open()) {
-                               plik >> number;
-                           } else {
-                               cout << "Podaj numer tablicy rejestracyjnej motocykla: " << endl;
-                               cin >> number;
-                           }
-
-                           int n = findNumber<Motorcycle>(motorcycles, number);
-
-                           Motorkomis.buy(*motorcycles.at(n), motorcycles);
-                       }
-                        break;
-                   }
 
                    case (3): {
 
@@ -593,51 +517,16 @@ int main(int argc, char* argv[]) {
                 cout << "LAKIERNIK" << endl;
 
                 string number;
-                int K;
 
                 if (plik.is_open()) {
-                    plik >> K;
+                    plik >> number;
                 } else {
-                    cout << "Wybierz rodzaj pojazdu: " << endl;
-                    cout << "(1) - samochód" << endl << "(2) - motocykl" << endl;
-                    cin >> K;
+                    cout << "Podaj numer tablicy rejestracyjnej samochodu: " << endl;
+                    cin >> number;
                 }
 
-                switch (K) {
-
-                    case (1): {
-
-                        if (plik.is_open()) {
-                            plik >> number;
-                        } else {
-                            cout << "Podaj numer tablicy rejestracyjnej samochodu: " << endl;
-                            cin >> number;
-                        }
-
-                        int n = findNumber<Car>(cars, number);
-                        Varnisher<Car>::changeColor(*cars.at(n), plik);
-
-                        break;
-                    }
-
-                    case (2): {
-
-                        if (plik.is_open()) {
-                            plik >> number;
-                        } else {
-                            cout << "Podaj numer tablicy rejestracyjnej motocykla: " << endl;
-                            cin >> number;
-                        }
-
-                        int n = findNumber<Motorcycle>(motorcycles, number);
-                        Varnisher<Motorcycle>::changeColor(*motorcycles.at(n), plik);
-
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
-                }
+                int n = findNumber<Engine_Vehicle>(engine_vehicles, number);
+                Varnisher<Engine_Vehicle>::changeColor(*engine_vehicles.at(n), plik);
 
                 break;
             }
@@ -648,9 +537,8 @@ int main(int argc, char* argv[]) {
         }
     } while(W != 0);
 
-    cars.clear();
-    motorcycles.clear();
+    engine_vehicles.clear();
     bikes.clear();
-
+    
     return 0;
 }
