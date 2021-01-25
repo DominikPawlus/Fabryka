@@ -1,3 +1,0 @@
-/Users/dominikpawlus/Library/Mobile Documents/com~apple~CloudDocs/AGH/Programowanie/PawlusDominik-etap2/Fabryka/CMakeFiles/rebuild_cache.dir
-/Users/dominikpawlus/Library/Mobile Documents/com~apple~CloudDocs/AGH/Programowanie/PawlusDominik-etap2/Fabryka/CMakeFiles/edit_cache.dir
-/Users/dominikpawlus/Library/Mobile Documents/com~apple~CloudDocs/AGH/Programowanie/PawlusDominik-etap2/Fabryka/CMakeFiles/PawlusDominik_etap2.dir

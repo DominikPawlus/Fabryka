@@ -23,17 +23,19 @@ struct false_brand {
 };
 
 
-Car loadCarData(int W, std::ifstream &plik);
+Car* loadCarData(int W, std::ifstream &plik);
 
-Motorcycle loadMotorData(int W, std::ifstream &plik);
+Motorcycle* loadMotorData(int W, std::ifstream &plik);
 
-Bike loadBikeData(int W, std::ifstream &plik);
+Bike* loadBikeData(int W, std::ifstream &plik);
+
 
 template <typename T>
-int findVehicle(T vehicle, std::vector<T> &garage) {
+int findVehicle(T* vehicle, std::vector<T*> &garage) {
 
     for(int i = 0; i < garage.size(); i++) {
-        if(vehicle == garage.at(i)) {
+        std::cout << vehicle << "   " << garage.at(i) << std::endl;
+        if(*vehicle == *garage.at(i)) {
             return i;
         }
     }
@@ -43,10 +45,10 @@ int findVehicle(T vehicle, std::vector<T> &garage) {
 }
 
 template <typename T>
-int findNumber(std::vector<T> &garage, const std::string& number) {
+int findNumber(std::vector<T*> &garage, const std::string& number) {
 
     for(int i = 0; i < garage.size(); i++) {
-        if(number == garage.at(i).number) {
+        if(number == garage.at(i)->number) {
             return i;
         }
     }

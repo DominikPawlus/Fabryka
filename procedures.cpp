@@ -1,6 +1,6 @@
 #include "procedures.h"
 
-Car loadCarData(int W, std::ifstream &plik) {
+Car* loadCarData(int W, std::ifstream &plik) {
 
     std::string owner = "Fabryka";
     std::string brand;
@@ -67,11 +67,11 @@ Car loadCarData(int W, std::ifstream &plik) {
         brand = "Mercedes";
     }
 
-    Car tmp = Car(owner, color, brand, door_count, 0, 0, 0);
+    Car* tmp = new Car(owner, color, brand, door_count, 0, 0, 0);
     return tmp;
 }
 
-Motorcycle loadMotorData(int W, std::ifstream &plik) {
+Motorcycle* loadMotorData(int W, std::ifstream &plik) {
 
     std::string owner = "Fabryka";
     std::string brand;
@@ -119,11 +119,11 @@ Motorcycle loadMotorData(int W, std::ifstream &plik) {
         brand = "Honda";
     }
 
-    Motorcycle tmp = Motorcycle(owner, color, brand, 0, 0, 0);
+    Motorcycle* tmp = new Motorcycle(owner, color, brand, 0, 0, 0);
     return tmp;
 }
 
-Bike loadBikeData(int W, std::ifstream &plik) {
+Bike* loadBikeData(int W, std::ifstream &plik) {
 
     std::string owner = "Fabryka";
     std::string brand = "Romet";
@@ -177,7 +177,7 @@ Bike loadBikeData(int W, std::ifstream &plik) {
         basket = false;
     }
 
-    Bike tmp = Bike(owner, color, brand, basket, 0, gears);
+    Bike* tmp = new Bike(owner, color, brand, basket, 0, gears);
     return tmp;
 }
 
