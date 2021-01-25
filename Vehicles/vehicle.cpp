@@ -31,7 +31,7 @@ std::string Vehicle::getBrand() {
     return this -> brand;
 }
 
-std::string Vehicle::getColor() {
+std::string Vehicle::getColor() const {
     return this -> color;
 }
 
@@ -39,6 +39,6 @@ int Vehicle::getCapacity() const {
     return this -> capacity;
 }
 
-int Vehicle::getMileage() const {
+float Vehicle::getMileage() const {
     return this -> mileage;
 }

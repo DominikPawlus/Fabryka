@@ -6,19 +6,28 @@ Car loadCarData(int W, std::ifstream &plik) {
     std::string brand;
     std::string color;
     int door_count;
-    int J;
+    int J; //wybór marki
 
-    if(plik.is_open()){
+    if(plik.is_open()) {
 
         if(W != 1 && W != 2) {
             plik >> owner;
         }
 
-        plik >> J >> color >> door_count;
+        plik >> J;
+        if (plik.fail()) {
+            false_brand kapsula;
+            throw kapsula;
+        }
+
+        plik >> color;
+
+        plik >> door_count;
         if (plik.fail()) {
             false_door_count kapsula;
             throw kapsula;
         }
+
     } else {
 
         if(W != 1 && W != 2) {
@@ -31,6 +40,13 @@ Car loadCarData(int W, std::ifstream &plik) {
         std::cin >> J;
         std::cout << "Podaj kolor: " << std::endl;
         std::cin >> color;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            false_brand kapsula;
+            throw kapsula;
+        }
+
         std::cout << "Podaj liczbę drzwi: " << std::endl;
         std::cin >> door_count;
 
@@ -60,7 +76,7 @@ Motorcycle loadMotorData(int W, std::ifstream &plik) {
     std::string owner = "Fabryka";
     std::string brand;
     std::string color;
-    int J;
+    int J; //wybór marki
 
     if(plik.is_open()){
 
@@ -68,7 +84,13 @@ Motorcycle loadMotorData(int W, std::ifstream &plik) {
             plik >> owner;
         }
 
-        plik >> J >> color;
+        plik >> J;
+        if (plik.fail()) {
+            false_brand kapsula;
+            throw kapsula;
+        }
+
+        plik >> color;
     } else {
 
         if(W != 1 && W != 2) {
@@ -79,6 +101,13 @@ Motorcycle loadMotorData(int W, std::ifstream &plik) {
         std::cout << "Wybierz markę motocykla: " << std::endl;
         std::cout << "(1) - Kawasaki" << std::endl << "(2) - Honda" << std::endl;
         std::cin >> J;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            false_brand kapsula;
+            throw kapsula;
+        }
+
         std::cout << "Podaj kolor: " << std::endl;
         std::cin >> color;
         }
@@ -101,7 +130,7 @@ Bike loadBikeData(int W, std::ifstream &plik) {
     std::string color;
     bool basket;
     int gears;
-    int J;
+    int J; //koszyk
 
     if(plik.is_open()){
 
@@ -109,7 +138,15 @@ Bike loadBikeData(int W, std::ifstream &plik) {
             plik >> owner;
         }
 
-        plik >> color >> J >> gears;
+        plik >> color;
+
+        plik >> J;
+        if (plik.fail()) {
+            false_brand kapsula;
+            throw kapsula;
+        }
+
+        plik >> gears;
     } else {
 
         if(W != 1 && W != 2) {
@@ -122,6 +159,13 @@ Bike loadBikeData(int W, std::ifstream &plik) {
         std::cout << "Czy rower posiada koszyk?" << std::endl;
         std::cout << "(1) - tak" << std::endl << "(2) - nie" << std::endl;
         std::cin >> J;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            false_brand kapsula;
+            throw kapsula;
+        }
+
         std::cout << "Podaj liczbę przełożeń:" << std::endl;
         std::cin >> gears;
     }

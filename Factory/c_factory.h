@@ -7,33 +7,33 @@
 #ifndef C_FACTORY_H
 #define C_FACTORY_H
 
-template <class T>
-class CarFactory : public Factory<T> {
+template <class Car>
+class CarFactory : public Factory<Car> {
 
 public:
 
     explicit CarFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency);
 
-    void addNew(std::string color, int door_count);
+    void addNew(const std::string& color, int door_count);
 
     Car * sell(const Car &car);
 
 };
 
-template <class T>
-CarFactory<T>::CarFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) : Factory<T>(brand, capacity, fuel_amount, efficiency){
+template <class Car>
+CarFactory<Car>::CarFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) : Factory<Car>(brand, capacity, fuel_amount, efficiency){
 }
 
-template <class T>
-void CarFactory<T>::addNew(std::string color, int door_count) {
+template <class Car>
+void CarFactory<Car>::addNew(const std::string& color, int door_count) {
 
     std::string owner = "Fabryka";
-    Car *car = new Car(owner, std::move(color), this -> brand, door_count, this -> capacity, this -> fuel_amount, this -> efficiency);
+    Car *car = new Car(owner, color, this -> brand, door_count, this -> capacity, this -> fuel_amount, this -> efficiency);
     this -> garage.push_back(*car);
 }
 
-template <class T>
-Car * CarFactory<T>::sell(const Car &car) {
+template <class Car>
+Car * CarFactory<Car>::sell(const Car &car) {
 
     for(int i = 0; i < this -> garage.size(); i++) {
 
@@ -43,7 +43,9 @@ Car * CarFactory<T>::sell(const Car &car) {
             return tmp;
         }
     }
-    return nullptr;
+
+    vehicle_no_exist kapsula;
+    throw kapsula;
 }
 
 #endif //C_FACTORY_H

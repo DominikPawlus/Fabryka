@@ -18,7 +18,7 @@ class Bike : public Vehicle {
 
         Bike(std::string owner, std::string color, std::string brand, bool basket, int capacity, int gears);
 
-        float go(float km);
+        void go(float km);
 
         bool isBasket() const;
         int getGears() const;

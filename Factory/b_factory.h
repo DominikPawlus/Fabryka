@@ -7,8 +7,8 @@
 #ifndef B_FACTORY_H
 #define B_FACTORY_H
 
-template <class T>
-class BikeFactory : public Factory<T> {
+template <class Bike>
+class BikeFactory : public Factory<Bike> {
 
 public:
 
@@ -19,12 +19,12 @@ public:
     Bike * sell(const Bike &bike);
 };
 
-template <class T>
-BikeFactory<T>::BikeFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) : Factory<T>(brand, capacity, fuel_amount, efficiency){
+template <class Bike>
+BikeFactory<Bike>::BikeFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) : Factory<Bike>(brand, capacity, fuel_amount, efficiency){
 }
 
-template <class T>
-void BikeFactory<T>::addNew(std::string color, bool basket, int gears) {
+template <class Bike>
+void BikeFactory<Bike>::addNew(std::string color, bool basket, int gears) {
 
     std::string owner = "Fabryka";
     int capacity = 5;
@@ -36,8 +36,8 @@ void BikeFactory<T>::addNew(std::string color, bool basket, int gears) {
     this -> garage.push_back(bike);
 }
 
-template <class T>
-Bike * BikeFactory<T>::sell(const Bike& bike) {
+template <class Bike>
+Bike * BikeFactory<Bike>::sell(const Bike& bike) {
 
     for(int i = 0; i < this -> garage.size(); i++) {
         if(this -> garage.at(i) == bike) {
@@ -46,7 +46,9 @@ Bike * BikeFactory<T>::sell(const Bike& bike) {
             return tmp;
         }
     }
-    return nullptr;
+
+    vehicle_no_exist kapsula;
+    throw kapsula;
 }
 
 #endif //B_FACTORY_H

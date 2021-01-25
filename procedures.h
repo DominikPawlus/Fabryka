@@ -18,6 +18,10 @@ struct vehicle_no_exist {
     std::string msg = "Podany samochód nie istnieje.";
 };
 
+struct false_brand {
+    std::string msg = "Podaj poprawny numer marki.";
+};
+
 
 Car loadCarData(int W, std::ifstream &plik);
 

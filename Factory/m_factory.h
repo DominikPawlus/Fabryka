@@ -4,11 +4,11 @@
 #include "../Vehicles/motorcycle.h"
 #include "../Factory/factory.h"
 
-#ifndef M_FACTORY_H
-#define M_FACTORY_H
+#ifndef M_FACMotorcycleORY_H
+#define M_FACMotorcycleORY_H
 
-template <class T>
-class MotorFactory : public Factory<T> {
+template <class Motorcycle>
+class MotorFactory : public Factory<Motorcycle> {
 
 public:
 
@@ -19,12 +19,12 @@ public:
     Motorcycle * sell(const Motorcycle &motor);
 };
 
-template <class T>
-MotorFactory<T>::MotorFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) : Factory<T>(brand, capacity, fuel_amount, efficiency){
+template <class Motorcycle>
+MotorFactory<Motorcycle>::MotorFactory(const std::string& brand, int capacity, float fuel_amount, float efficiency) : Factory<Motorcycle>(brand, capacity, fuel_amount, efficiency){
 }
 
-template <class T>
-void MotorFactory<T>::addNew(std::string color) {
+template <class Motorcycle>
+void MotorFactory<Motorcycle>::addNew(std::string color) {
 
     std::string owner = "Fabryka";
     Motorcycle motor = Motorcycle(owner, std::move(color), this -> brand, this -> capacity, this -> fuel_amount, this -> efficiency);
@@ -32,8 +32,8 @@ void MotorFactory<T>::addNew(std::string color) {
 
 }
 
-template <class T>
-Motorcycle * MotorFactory<T>::sell(const Motorcycle& motor) {
+template <class Motorcycle>
+Motorcycle * MotorFactory<Motorcycle>::sell(const Motorcycle& motor) {
 
     for(int i = 0; i < this -> garage.size(); i++) {
         if(this -> garage.at(i) == motor) {
@@ -42,7 +42,9 @@ Motorcycle * MotorFactory<T>::sell(const Motorcycle& motor) {
             return tmp;
         }
     }
-    return nullptr;
+
+    vehicle_no_exist kapsula;
+    throw kapsula;
 }
 
-#endif //M_FACTORY_H
+#endif //M_FACMotorcycleORY_H

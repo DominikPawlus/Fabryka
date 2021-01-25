@@ -87,6 +87,15 @@ int main(int argc, char* argv[]) {
                     try {
                         tmp = loadCarData(W, plik);
                     }
+                    catch(false_brand &kapsula) {
+                        if(plik.is_open()) {
+                            cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                            exit(EXIT_FAILURE);
+                        } else {
+                            cout << kapsula.msg << endl;
+                            break;
+                        }
+                    }
                     catch(false_door_count &kapsula) {
                         if(plik.is_open()) {
                             cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
@@ -167,15 +176,26 @@ int main(int argc, char* argv[]) {
 
                         tmp = loadCarData(W, plik);
 
-                        if (tmp.getBrand() == "BMW") {
-                            cars.push_back(*BMW.sell(tmp));
-                        }
+                        try {
+                            if (tmp.getBrand() == "BMW") {
+                                cars.push_back(*BMW.sell(tmp));
+                            }
 
-                        if (tmp.getBrand() == "Audi") {
-                            cars.push_back(*Audi.sell(tmp));
+                            if (tmp.getBrand() == "Audi") {
+                                cars.push_back(*Audi.sell(tmp));
+                            }
+                            if (tmp.getBrand() == "Mercedes") {
+                                cars.push_back(*Mercedes.sell(tmp));
+                            }
                         }
-                        if (tmp.getBrand() == "Mercedes") {
-                            cars.push_back(*Mercedes.sell(tmp));
+                        catch(vehicle_no_exist &kapsula) {
+                            if(plik.is_open()) {
+                                cout << kapsula.msg << endl << "Podaj poprawny plik." << endl;
+                                exit(EXIT_FAILURE);
+                            } else {
+                                cout << kapsula.msg << endl;
+                                break;
+                            }
                         }
 
                         if (plik.is_open()) {
@@ -617,6 +637,9 @@ int main(int argc, char* argv[]) {
 
                         break;
                     }
+                    default: {
+                        break;
+                    }
                 }
 
                 break;
@@ -627,5 +650,10 @@ int main(int argc, char* argv[]) {
             }
         }
     } while(W != 0);
+
+    cars.clear();
+    motorcycles.clear();
+    bikes.clear();
+
     return 0;
 }

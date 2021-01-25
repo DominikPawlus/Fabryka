@@ -2,8 +2,6 @@
 
 #include <utility>
 
-Engine_Vehicle::Engine_Vehicle() {}
-
 Engine_Vehicle::Engine_Vehicle(std::string owner, std::string color, std::string brand, int capacity, float fuel_amount, float efficiency)
     : Vehicle(std::move(owner), std::move(color), std::move(brand), capacity), fuel_amount(fuel_amount), efficiency(efficiency) {
 }
@@ -24,17 +22,15 @@ bool operator==(const Engine_Vehicle& e_vehicle1, const Engine_Vehicle& e_vehicl
     }
 } // capacity, fuel i efficiency są zmienne - niepotrzebne do porównania
 
-float Engine_Vehicle::go(float km) {
+void Engine_Vehicle::go(float km) {
 
     if(!this -> license_plate) {
         std::cout << "Żeby móc jeździć pojazdem, musisz go najpierw zarejestrować!" << std::endl;
-        return 0;
     }
     this -> mileage += km;
     this -> fuel_amount -= km / 100 * this -> getEfficiency();
     std::cout << "Przejechałeś " << km << " kilometrów pojazdem o rejestracji: " << std::endl << this -> number << std::endl;
-    return this -> mileage;
-};
+}
 
 float Engine_Vehicle::getFuelAmount() const {
     return this -> fuel_amount;
@@ -42,8 +38,4 @@ float Engine_Vehicle::getFuelAmount() const {
 
 float Engine_Vehicle::getEfficiency() const {
     return this -> efficiency;
-}
-
-bool Engine_Vehicle::isRegistered() {
-    return this -> license_plate;
 }

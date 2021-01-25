@@ -23,12 +23,13 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const Vehicle& vehicle);
     friend bool operator==(const Vehicle& vehicle1, const Vehicle& vehicle2);
 
+    virtual void go(float km) = 0;
     void splitMileage();
 
     std::string getBrand();
-    std::string getColor();
+    std::string getColor() const;
     int getCapacity() const;
-    int getMileage() const;
+    float getMileage() const;
 };
 
 #endif //VEHICLE_H

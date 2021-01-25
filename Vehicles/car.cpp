@@ -2,8 +2,6 @@
 
 #include <utility>
 
-Car::Car() {}
-
 Car::Car(std::string owner, std::string color, std::string brand, int door_count, int capacity, float fuel_amount, float efficiency)
     : Engine_Vehicle(std::move(owner), std::move(color), std::move(brand), capacity, fuel_amount, efficiency), door_count(door_count) {
 }
@@ -28,4 +26,4 @@ bool operator==(const Car& car1, const Car& car2) {
 
 int Car::getDoorCount() const {
     return this -> door_count;
-};
+}
